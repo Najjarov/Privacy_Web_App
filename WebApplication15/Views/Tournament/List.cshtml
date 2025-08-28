@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Privacy_Web_App.Models.TournamentModel>
+
+@{
+    ViewData["Title"] = "Tournaments List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="st-dark-bg">
+    <div class="st-height-b100 st-height-lg-b80"></div>
+    <div class="container">
+        <div class="st-section-heading st-style1">
+            <h4 class="st-section-heading-title">Tournament List</h4>
+            <h2 class="st-section-heading-subtitle">Tournament List</h2>
+        </div>
+        <div class="st-height-b25 st-height-lg-b25"></div>
+    </div>
+
+    <!-- Contact Container -->
+
+    <div class="container">
+    </div>
+    <div class="st-height-b100 st-height-lg-b80"></div>
+</section>
+
+
+<div class="container">
+    <div class="row">
+        <table class="table table-hover table-transparent in-te-ta" style="font-size:20px;">
+            <thead>
+                <tr>
+                    <th>
+                        Tournament Name
+                    </th>
+                    <th>
+                        
+                    </th>
+                    <th>
+                        
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+
+
+
+                        <td>
+                            @Html.HiddenFor(modelItem => item.Id)
+                            @($"{@item.Name} {@item.year}")
+                        </td>
+
+                        
+                        <td>
+                            <a class="stat-link" href="@Url.Action("Stats", "Tournament", new { Id = item.Id })">Stats</a>
+                        </td>
+                        <td>
+                            @if (ViewData["tour"+item.Id] == "yes")
+                            {
+                                <a class="stat-link" href="@Url.Action("team_rotations", "Tournament", new { Id = item.Id })">Team Rotations</a>
+                            }
+                            else
+                            {
+                                <p style="margin-bottom:0px">No Available Rotations.</p>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

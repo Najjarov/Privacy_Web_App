@@ -1,0 +1,144 @@
+﻿@model Privacy_Web_App.Models.TournamentTeamRotationsViewModel
+@{
+    ViewBag.Title = @ViewBag.TeamName + " Rotations - " + @ViewBag.tourname + " " + @ViewBag.touryear + " " ;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="st-dark-bg">
+    
+    <div class="container">
+        <div class="st-section-heading st-style1">
+            <h4 class="st-section-heading-title">@ViewBag.tourname @ViewBag.touryear - @ViewBag.TeamName Rotations</h4>
+            <h2 class="st-section-heading-subtitle" style="font-size:50px;">@ViewBag.tourname @ViewBag.touryear - @ViewBag.TeamName Rotations</h2>
+        </div>
+       
+    </div>
+
+    <!-- Contact Container -->
+
+    <div class="container">
+    </div>
+    
+</section>
+
+
+<section class="image__with--text__section section--padding">
+    <div class="container">
+        <a class="btn btn-outline-light" type="button" style="width:100%;margin-bottom:20px;" href="@Url.Action("team_rotations", "Tournament", new { Id =  ViewBag.tourid})">
+            Back to Rotation List
+        </a>
+        <div class="row row-cols-md-2 row-cols-1  align-items-center" style="margin-bottom: 35px;">
+            <div class="col" style="background-image:url(/img/Logo_Back.png);border-radius:100px;min-height: 182.39px;align-content: center;">
+                <div class="image__with--text__thumbnail" style="padding:20px">
+                    <img class="display-block" src="/img/Teams/@ViewBag.TeamLogo" alt="drone-image">
+                </div>
+            </div>
+            <div class="col">
+                <div class="image__with--text__content">
+                    <h2 class="image__with--text__title mb-18 info_title">
+                        @ViewBag.TeamName
+                    </h2>
+                    <div  style="height: 25px;"> </div>
+                    <div><h3 class="team-info-label">Landing POI</h3></div>
+                            <div class="image__with--text__content--footer d-flex">
+                                <table class="table table-transparent">
+
+                                    <tbody>
+
+                                @{
+                                    var landing = ViewBag.mapName + " - " + ViewBag.LandingPoi;
+                                            <tr>
+                                    
+                                       
+                                        
+                                    
+                                        <td class="te-in-pl-na">@landing</td>
+
+                                            </tr>
+                                    }
+
+
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+
+                    
+
+                   
+                            </div>
+                            
+
+
+                </div>
+            </div>
+        </div>
+    
+        <div class="container">
+       
+        <nav>
+            <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist" style="margin-bottom:15px">
+               
+               
+                @if (ViewBag.count1>0)
+                {
+
+                    <a class="nav-item nav-link @ViewBag.active1" href="@Url.Action("team_rotation_details", "Tournament", new { tourid = ViewBag.tourid , teamid = ViewBag.Teamid,mapid = ViewBag.map1_id })">@ViewBag.map1_name</a>
+                }
+
+
+                @if (ViewBag.count2 > 0)
+                {
+                    <a class="nav-item nav-link @ViewBag.active2" href="@Url.Action("team_rotation_details", "Tournament", new {  tourid = ViewBag.tourid , teamid = ViewBag.Teamid,mapid = ViewBag.map2_id  })">@ViewBag.map2_name</a>
+                }
+                
+            </div>
+        </nav>
+
+
+
+        <div class='nav flex-row' style="flex-wrap:nowrap">
+            <div class="nav flex-column nav-pills" id="v-pills-tab" style='width: 100px' role="tablist" aria-orientation="vertical">
+                @{
+                    Boolean first = true;
+                   
+                   
+                }
+                @foreach (var item in Model.TeamRotations.Where(x => x.map_id == ViewBag.currentmapid).DistinctBy(x => x.endzone_poi_id))
+                {
+                    <a class="nav-link @( first ? "active" : "" )" id="v-pills-@item.Id-tab" data-toggle="pill" href="#v-pills-@item.Id" role="tab" aria-controls="v-pills-@item.Id" aria-selected="true" style="border-width:thin;border-bottom-style:groove">@item.endzone_poi_name</a>
+                    first = false;
+                }
+              
+            </div>
+            <div class="tab-content" id="v-pills-tabContent">
+                @{
+                    Boolean first2 = true;
+
+
+                }
+                @foreach (var item in Model.TeamRotations.Where(x => x.map_id == ViewBag.currentmapid).DistinctBy(x=>x.endzone_poi_id))
+                {
+                   
+                   
+                   
+               
+                <div class="tab-pane fade @( first2 ? "show active" : "" )" id="v-pills-@item.Id" role="tabpanel" aria-labelledby="v-pills-@item.Id-tab">
+                        @foreach (var img in Model.TeamRotations.Where(x => x.map_id == ViewBag.currentmapid && x.endzone_poi_id == item.endzone_poi_id))
+                        {
+                            <img src="/img/TeamRotations/@img.img" style="margin-bottom:25px" />
+                        }
+                    </div>
+                first2 = false;
+                }
+            </div>
+        </div>
+
+
+
+
+    </div>
+    
+  
+    
+</section>

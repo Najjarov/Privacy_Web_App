@@ -1,0 +1,86 @@
+﻿@model Privacy_Web_App.Models.TournamentTeamRotationsViewModel
+
+
+@{
+    ViewBag.Title = "Rotations - " + @ViewBag.tourname + " " + @ViewBag.touryear;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<section class="st-dark-bg">
+    <div class="st-height-b100 st-height-lg-b80"></div>
+    <div class="container">
+        <div class="st-section-heading st-style1">
+            <h4 class="st-section-heading-title">@ViewBag.tourname @ViewBag.touryear - Rotations</h4>
+            <h2 class="st-section-heading-subtitle">@ViewBag.tourname @ViewBag.touryear - Rotations</h2>
+        </div>
+        <div class="st-height-b25 st-height-lg-b25"></div>
+    </div>
+
+    <!-- Contact Container -->
+
+    <div class="container">
+   
+    <div class="st-height-b100 st-height-lg-b80">
+        <a class="btn btn-outline-light" type="button" style="width:100%;margin-bottom:20px;" href="@Url.Action("list", "Tournament")">
+            Back to Tournament List
+        </a>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model.TeamRotations)
+        {
+            <a class="col-4" href="@Url.Action("team_rotation_details", "Tournament", new { tourid = item.tour_id,teamid= item.team_id})" style="margin-bottom:30px">
+        <div class="card" >
+                    <div style="height: 350px;align-content: center;padding: 10px;">
+                        <img class="card-img-top" src="/img/Teams/@item.team_logo" alt="Card image cap" >
+                    </div>
+            <div class="card-body">
+                        <h5 class="card-title" style="font-weight: bold;color:black;font-size: xx-large;text-align:center">@item.team_name</h5>
+                
+            </div>
+            
+
+
+            <ul class="list-group list-group-flush">
+                        @foreach (var poi in item.LandingPois)
+                        {
+                            
+                                var color = "";
+                                if (poi.map_name == "World`s Edge")
+                                {
+                                    color = "cornsilk";
+                                }
+                            if (poi.map_name == "Storm Point")
+                                {
+                                color = "powderblue";
+                                }
+                            <li class="list-group-item" style="font-weight: bold;color:black;text-align:center;background-color:@color">@poi.map_name - @poi.landing_poi_name</li>
+                            
+                        }
+                        @*  var color = "";
+                    if (poi.map_name == "World`s Edge")
+                    {
+                    <li class="list-group-item" style="font-weight: bold;color: white;text-align:center;/* background-color:cornsilk; */background-image: url(/img/maps/we_logo.png);background-size: cover;background-position: bottom;">@poi.map_name - @poi.landing_poi_name</li>
+                    }
+                    if (poi.map_name == "Storm Point")
+                    {
+                    <li class="list-group-item" style="font-weight: bold;color: white;text-align:center;background-image: url(/img/maps/sp_logo.png);background-size: cover;/* background-position: unset; */">@poi.map_name - @poi.landing_poi_name</li>
+                    } *@
+            </ul>
+                    
+        </div>
+           
+            </a>}
+    </div>
+</div>
+

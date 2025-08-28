@@ -1,0 +1,233 @@
+﻿@model Privacy_Web_App.Models.MapsViewModel
+
+@{
+    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="st-dark-bg" >
+    
+    <div class="st-height-b100 st-height-lg-b80"></div>
+    <div class="container">
+       
+        
+        <div class="st-section-heading st-style1">
+            <h4 class="st-section-heading-title">@Model.map.Name - POIs</h4>
+            <h2 class="st-section-heading-subtitle" style="font-size:50px;">@Model.map.Name - POIs</h2>
+        </div>
+        <div class="st-height-b25 st-height-lg-b25"></div>
+    </div>
+
+
+    <div class="container">
+        @Html.Partial("/Views/Shared/_MapsLinksPartial.cshtml")
+        @Html.Partial("/Views/Shared/_mapTabsPartial.cshtml")
+        
+        <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent" style="position: relative;">
+            <div class="tab-pane fade show active" id="nav-poi" role="tabpanel" aria-labelledby="nav-poi-stats">
+                <h3 style="text-align:center">Hover your mouse over the POI and then click to get the info</h3>
+               
+                   
+                        <div style="width:1080px;height:1080px;position:relative;top:0px;left:0px">
+
+                    @if (Model.map.Id == 1)
+                    {
+                        <img src="/img/maps/poi_draft_ship_distance_we.png" style="position:relative;top:0px;left:0px" />
+                    }
+                    @if (Model.map.Id == 2)
+                    {
+                        <img src="/img/maps/poi_draft_ship_distance_sp.png" style="position:relative;top:0px;left:0px" />
+                    }
+                   
+
+
+
+                            @foreach(var poi in Model.pois)
+                        {
+                            <div class="">
+                                @{
+                                   
+                                    var hover_x = poi.hover_x + "px";
+                                    var hover_y = poi.hover_y + "px";
+
+
+                              
+
+                                    <a class="poi_container" href="@Url.Action("poi", "map", new { Id = poi.Id })" style="position:absolute;left:@hover_x;top:@hover_y;z-index:1000">
+
+                                        <img class="poi_overlay" src="/img/maps/@poi.hover_img" style="" />
+                                </a>
+
+                                    
+
+
+                                
+                               
+                        }
+                            </div>
+                        }
+                        </div>
+
+                      
+                  
+
+
+               
+            </div>
+           
+        </div>
+
+    <div class="st-height-b100 st-height-lg-b80"></div>
+</div>
+
+</div>
+
+
+
+@* <section id="portfolio">
+    <div class="st-height-b100 st-height-lg-b80"></div>
+    <div class="container">
+        <div class="st-section-heading st-style1">
+            <h4 class="st-section-heading-title">POIs</h4>
+            <h2 class="st-section-heading-subtitle">POIs</h2>
+        </div>
+        <div class="st-height-b25 st-height-lg-b25"></div>
+    </div>
+    <div class="container">
+        <div class="row">
+             @foreach (var poi in Model.pois)
+            {
+            <div class="col-lg-4 col-md-6">
+                <div class="st-portfolio-single st-style1 st-lightgallery">
+                    <div class="st-portfolio-item">
+                            <a href="@Url.Action("poi", "map", new { Id = poi.Id })" class="st-portfolio st-zoom st-lightbox-item">
+                            <div class="st-portfolio-img st-zoom-in">
+                                    <img src="/img/pois/@poi.img" alt="portfolio">
+                            </div>
+                                <div class="st-portfolio-item-hover">
+                                    
+                                <h5>@poi.Name</h5>
+                                   
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            }
+          
+           
+        </div>
+    </div>
+    <div class="st-height-b100 st-height-lg-b80"></div>
+</section> *@
+
+<!-- Modal gallery -->
+<section class="">
+    <!-- Section: Images -->
+    <section class="container">
+        <div class="row">
+            @*
+            @foreach (var poi in Model.pois)
+            {
+                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="hovereffect">
+                        <img class="img-responsive" src="/img/pois/@poi.img" alt="">
+                        <div class="overlay">
+                            <img class="img-responsive" src="/img/pois/@poi.loot_bins_spawn_img" alt="">
+                            <p>
+                                <a href="@Url.Action("poi", "Map")">
+                            </p>
+                        </div>
+                    </div>
+                </div> 
+
+
+
+                 <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+                    <div class="bg-image hover-overlay ripple shadow-1-strong rounded"
+                     data-ripple-color="light">
+                        <img src="/img/pois/@poi.img"
+                         class="w-100" />
+                        <a href="@Url.Action("poi", "Map")">
+                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
+                    </a>
+                </div>
+            </div> 
+            }*@
+           
+        </div>
+    </section>
+    <!-- Section: Images -->
+    <!-- Section: Modals -->
+    <section class="">
+        <!-- Modal 1 -->
+        <div class="modal fade"
+             id="exampleModal1"
+             tabindex="-1"
+             aria-labelledby="exampleModal1Label"
+             aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="ratio ratio-16x9">
+                        <iframe src="https://www.youtube.com/embed/A3PDXmYoF5U"
+                                title="YouTube video"
+                                allowfullscreen></iframe>
+                    </div>
+
+                    <div class="text-center py-3">
+                        <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-secondary" data-mdb-dismiss="modal">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal 2 -->
+        <div class="modal fade"
+             id="exampleModal2"
+             tabindex="-1"
+             aria-labelledby="exampleModal2Label"
+             aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="ratio ratio-16x9">
+                        <iframe src="https://www.youtube.com/embed/wTcNtgA6gHs"
+                                title="YouTube video"
+                                allowfullscreen></iframe>
+                    </div>
+
+                    <div class="text-center py-3">
+                        <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-secondary" data-mdb-dismiss="modal">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal 3 -->
+        <div class="modal fade"
+             id="exampleModal3"
+             tabindex="-1"
+             aria-labelledby="exampleModal3Label"
+             aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="ratio ratio-16x9">
+                        <iframe src="https://www.youtube.com/embed/vlDzYIIOYmM"
+                                title="YouTube video"
+                                allowfullscreen></iframe>
+                    </div>
+
+                    <div class="text-center py-3">
+                        <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-secondary" data-mdb-dismiss="modal">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Section: Modals -->
+</section>
+<!-- Modal gallery -->

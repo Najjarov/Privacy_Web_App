@@ -1,0 +1,44 @@
+﻿@model Privacy_Web_App.Models.playable_spots_Model
+
+
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<div class="st-dark-bg">
+    <div class="st-height-b100 st-height-lg-b80"></div>
+    <div class="container">
+        <div class="st-section-heading st-style1">
+            <h4 class="st-section-heading-title">@Model.Map_Name - Playable Spots</h4>
+            <h2 class="st-section-heading-subtitle" style="font-size:50px;">>@Model.Map_Name - Playable Spots</h2>
+        </div>
+        <div class="st-height-b25 st-height-lg-b25"></div>
+    </div>
+
+
+    <div class="container">
+        @Html.Partial("/Views/Shared/_MapsLinksPartial.cshtml")
+        @Html.Partial("/Views/Shared/_mapTabsPartial.cshtml")
+
+
+
+        <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent" style="position: relative;">
+           
+                <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+
+
+                    <div class="container">
+                        <img src="/img/maps/@Model.img" />
+                    </div>
+
+
+
+                </div>
+
+            
+        </div>
+    </div>
+</div>
+
+

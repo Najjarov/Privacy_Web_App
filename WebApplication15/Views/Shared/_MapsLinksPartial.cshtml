@@ -1,0 +1,40 @@
+﻿
+
+
+
+
+<div class="row" style="margin-bottom: 30px;">
+	@{
+		string current = ViewBag.current;
+		
+		@foreach(var map in Model.maps)
+
+		{
+
+			@if(map.Id != Model.map.Id)
+			{
+
+			
+			
+			string viewdata = "map" + map.Id;
+			@if (ViewData[viewdata] == "Yes"){
+				<div class="col" style="text-align: -webkit-center;">
+
+				
+
+				<a style="position: relative;text-align: center;" href="@Url.Action(current, "map", new { id = map.Id })">
+
+
+							<img src="/img/maps/@map.Logo_img" style="opacity:0.5;border-radius: 55px 15px;" />
+					<div></div>
+					<h3 style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);">
+						@map.Name
+					</h3>
+				</a>
+
+					</div>
+				}
+			}}
+	}
+	
+</div>

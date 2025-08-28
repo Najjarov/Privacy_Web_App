@@ -1,0 +1,367 @@
+﻿@model Privacy_Web_App.Models.InteractiveMapViewModel
+
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}<style>
+     .hidden {
+         display: none;
+     }
+     
+.controls-container {
+    color: #f1f1f2;
+   
+    padding: 5px;
+    border: 1px solid #d1d3d4;
+    border-radius: 2px;
+    position: fixed;
+    top: 50%;
+    left: 10px;
+    font-size: 12px;
+}
+
+     .form-check-input{
+         width: 35px;
+         height: 40px;
+         margin-right: 10px
+     }
+
+     .form-check {
+       line-height:40px;
+         height: 40px;
+        font-size:large;
+     }
+    .controls-container button {
+       
+        border: none;
+        
+       
+        text-align: center;
+        text-decoration: none;
+        display: block;
+        width: 100%;
+        margin-bottom: 5px;
+        outline: none;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+        
+        .controls-container .form-check-label {
+            margin-left:5px;
+        }
+        .controls-container img {
+            margin-left:20px;
+            height:30px;
+        }
+
+</style>
+<div class="controls-container">
+   
+
+    @if (Model.evacs.Count() > 0)
+    {
+        
+    
+    <div class="form-check form-switch">
+    <input class="form-check-input" type="checkbox" role="switch" id="evac_btn"  checked>
+
+
+            <label class="form-check-label" for="evac_btn"><img src="~/img/evac_icon.png" /> Evacs</label>
+</div>
+}
+ @if (Model.valks.Count() > 0)
+    {
+        <div class="form-check form-switch">
+    <input class="form-check-input" type="checkbox" role="switch" id="valk_btn"  checked>
+   
+    <label class="form-check-label" for="valk_btn"> <img src="~/img/valk_icon.png" /> Valk Ults</label>
+</div>}
+ @if (Model.climbs.Count() > 0)
+    {
+        <div class="form-check form-switch">
+    <input class="form-check-input" type="checkbox" role="switch" id="climb_btn"  checked>
+    	
+    <label class="form-check-label" for="climb_btn"><img src="~/img/climb_icon.png" /> Climbs</label>
+</div>}
+ @if (Model.voids.Count() > 0)
+    {
+        <div class="form-check form-switch">
+    <input class="form-check-input" type="checkbox" role="switch" id="void_btn"  checked>
+       
+    <label class="form-check-label" for="void_btn"><img src="~/img/void_icon.png" /> Alter Voids</label>
+</div>}
+ @if (Model.rats.Count() > 0)
+    {
+        <div class="form-check form-switch">
+    <input class="form-check-input" type="checkbox" role="switch" id="rat_btn"  checked>
+
+            <label class="form-check-label" for="rat_btn"><img src="~/img/rat_icon.png" /> Rat Spots</label>
+</div>}
+<hr style="
+    margin-top: 5px;
+    margin-bottom: 5px;
+">
+<!-- Check All / Uncheck All Button -->
+<div>
+    <button id="toggle_all_btn" class="btn btn-primary" onclick="toggleCheckboxes()">Toggle All</button>
+</div>
+</div>
+
+</div>
+<div class="st-dark-bg">
+    <div class="st-height-b100 st-height-lg-b80"></div>
+    <div class="container">
+        <div class="st-section-heading st-style1">
+            <h4 class="st-section-heading-title">@Model.map.Name - Interactive Map</h4>
+            <h2 class="st-section-heading-subtitle" style="font-size:50px;">@Model.map.Name - Interactive Map</h2>
+        </div>
+        <div class="st-height-b25 st-height-lg-b25"></div>
+    </div>
+    <div class="container">
+
+        @Html.Partial("/Views/Shared/_MapsLinksPartial.cshtml")
+        @Html.Partial("/Views/Shared/_mapTabsPartial.cshtml")
+
+        <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent" style="position: relative;">
+        <div class="tab-pane fade show active" id="nav-poi" role="tabpanel" aria-labelledby="nav-poi-stats">
+    <div class="container">
+       
+       
+
+
+                <div style="width:1080px;height:1080px;position:relative;top:0px;left:0px">
+
+                    @if (Model.Map_id == 1)
+                    {
+                <img src="/img/maps/we_evacs_map.png" style="position:relative;top:0px;left:0px" />
+                    }
+                    @if (Model.Map_id == 2)
+                    {
+                <img src="/img/maps/sp_evacs_map.png" style="position:relative;top:0px;left:0px" />
+                    }
+                        @if (Model.Map_id == 6)
+                        {
+                            <img src="/img/maps/e-district_evacs_map.png" style="position:relative;top:0px;left:0px" />
+                        }
+
+                      
+
+                    @foreach (var poi in Model.evacs)
+                    {
+                        <div class="">
+                            @{
+                                var hover_x = poi.x -12+ "px";
+                                var hover_y = poi.y -12+ "px";
+                        <a class="video-btn evac" data-toggle="modal" data-src="@poi.video" data-target="#VidModal" style="cursor:pointer;position:absolute;left:@hover_x;top:@hover_y;z-index:1000">
+							<img src="~/img/evac_icon.png" />
+                                </a>
+                            }
+                        </div>
+                    }
+                        @foreach (var poi in Model.voids)
+                        {
+                            <div class="">
+                                @{
+                                    var hover_x = poi.x - 12 + "px";
+                                    var hover_y = poi.y - 12 + "px";
+                                    <a class="video-btn void" data-toggle="modal" data-src="@poi.video" data-target="#VidModal" style="cursor:pointer;position:absolute;left:@hover_x;top:@hover_y;z-index:1000">
+                                        <img src="~/img/void_icon.png" />
+                                    </a>
+                                }
+                            </div>
+                        }
+                         @foreach (var poi in Model.rats)
+                        {
+                            <div class="">
+                                @{
+                                    var hover_x = poi.x - 12 + "px";
+                                    var hover_y = poi.y - 12 + "px";
+                                    <a class="video-btn rat" data-toggle="modal" data-src="@poi.video" data-target="#VidModal" style="cursor:pointer;position:absolute;left:@hover_x;top:@hover_y;z-index:1000">
+                                        <img src="~/img/rat_icon.png" />
+                                    </a>
+                                }
+                            </div>
+                        }
+            @foreach (var poi in Model.valks)
+            {
+                <div class="">
+                    @{
+
+                        var hover_x = poi.x - 12 + "px";
+                        var hover_y = poi.y - 12 + "px";
+
+
+
+
+                        <a class="video-btn valk" data-toggle="modal" data-src="@poi.video" data-target="#VidModal" style="cursor:pointer;position:absolute;left:@hover_x;top:@hover_y;z-index:1000">
+							<img src="~/img/valk_icon.png" />
+                           
+                        </a>
+
+
+
+
+
+
+                    }
+                </div>
+            }
+            @foreach (var poi in Model.climbs)
+            {
+                <div class="">
+                    @{
+
+                        var hover_x = poi.x - 12 + "px";
+                        var hover_y = poi.y - 12 + "px";
+
+
+
+
+                        <a class="video-btn climb" data-toggle="modal" data-src="@poi.video" data-target="#VidModal" style="cursor:pointer;position:absolute;left:@hover_x;top:@hover_y;z-index:1000">
+							<img src="~/img/climb_icon.png" />
+                            
+                        </a>
+
+
+
+
+
+
+                    }
+                </div>
+            }
+                </div>
+
+
+
+
+
+
+            </div>
+
+        </div>
+
+        <div class="st-height-b100 st-height-lg-b80"></div>
+
+        </div>
+
+<div class="modal fade" id="VidModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="max-width:70vw">
+        <div class="modal-content">
+
+
+            <div class="modal-body" style="background-color:#0a101e">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span style="color:white" aria-hidden="true">&times;</span>
+                </button>
+                <!-- 16:9 aspect ratio -->
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="" id="video" allowscriptaccess="always" allow="autoplay"></iframe>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        // Gets the video src from the data-src on each button
+
+        var $videoSrc;
+        $('.video-btn').click(function () {
+            $videoSrc = $(this).data("src");
+        });
+
+
+
+
+        // when the modal is opened autoplay it
+        // $('#VidModal').on('shown.bs.modal', function (e) {
+
+        //     // set the video src to autoplay and not to show related video. Youtube related video is like a box of chocolates... you never know what you're gonna get
+        //     $("#video").attr('src', $videoSrc + "?autoplay=1&amp;modestbranding=1&amp;showinfo=0;allow=autoplay");
+
+        // })
+
+        $('#VidModal').on('shown.bs.modal', function (e) {
+
+            // set the video src to autoplay and not to show related video. Youtube related video is like a box of chocolates... you never know what you're gonna get
+            $("#video").attr('src', $videoSrc);
+
+        })
+
+        // stop playing the youtube video when I close the modal
+        $('#VidModal').on('hide.bs.modal', function (e) {
+            // a poor man's stop video
+            $("#video").attr('src', $videoSrc);
+        })
+
+
+
+
+
+    });
+
+       function updateVisibility() {
+    const evacs = document.getElementsByClassName('evac');
+    const valks = document.getElementsByClassName('valk');
+    const climbs = document.getElementsByClassName('climb');
+    const voids = document.getElementsByClassName('void');
+      const rats = document.getElementsByClassName('rat');
+
+    const evac_btn = document.getElementById('evac_btn');
+    const valk_btn = document.getElementById('valk_btn');
+    const climb_btn = document.getElementById('climb_btn');
+    const void_btn = document.getElementById('void_btn');
+     const rat_btn = document.getElementById('rat_btn');
+
+    for (let i = 0; i < evacs.length; i++) {
+        evacs[i].style.display = evac_btn.checked ? 'block' : 'none';
+    }
+    for (let i = 0; i < valks.length; i++) {
+        valks[i].style.display = valk_btn.checked ? 'block' : 'none';
+    }
+    for (let i = 0; i < climbs.length; i++) {
+        climbs[i].style.display = climb_btn.checked ? 'block' : 'none';
+    }
+    for (let i = 0; i < voids.length; i++) {
+        voids[i].style.display = void_btn.checked ? 'block' : 'none';
+    }
+     for (let i = 0; i < rats.length; i++) {
+        rats[i].style.display = rat_btn.checked ? 'block' : 'none';
+    }
+}
+
+// Add event listeners for individual checkbox changes
+document.getElementById('evac_btn').addEventListener('change', updateVisibility);
+document.getElementById('valk_btn').addEventListener('change', updateVisibility);
+document.getElementById('climb_btn').addEventListener('change', updateVisibility);
+document.getElementById('void_btn').addEventListener('change', updateVisibility);
+document.getElementById('rat_btn').addEventListener('change', updateVisibility);
+
+// Function to toggle all checkboxes at once
+function toggleCheckboxes() {
+    const checkboxes = document.querySelectorAll('.form-check-input');
+    const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
+    
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = !allChecked;
+    });
+
+    // Update visibility after toggling all checkboxes
+    updateVisibility();
+}
+
+// Initial call to set the visibility based on initial checkbox states
+updateVisibility();
+</script>
+

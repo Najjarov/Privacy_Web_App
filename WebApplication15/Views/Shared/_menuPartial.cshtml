@@ -1,0 +1,145 @@
+﻿
+<style>
+    .dropdown-submenu {
+        position: relative;
+    }
+
+        .dropdown-submenu .dropdown-menu {
+            top: 0;
+            left: 100%;
+            margin-top: -1px;
+        }
+</style>
+<ul class="st-nav-list st-onepage-nav">
+    <li>
+        
+        <a class=" dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+            Tools
+        </a>
+
+
+
+
+
+
+        <div class="dropdown-menu">
+
+            
+            
+                
+            @if (ViewData["menu1"]!=null){
+            <a class="dropdown-item" href="@Url.Action("mini_game", "Tools")" style="text-align: Center">Mini Game</a>
+            }
+             @if (ViewData["menu2"]!=null){
+                <a class="dropdown-item" href="@Url.Action("Magic_Generator", "Tools")" style="text-align: Center">Magic Generator</a>
+             }
+            @if (ViewData["menu3"] != null)
+            {
+                <a class="dropdown-item" href="@Url.Action("Weapon_Simulator", "Tools")" style="text-align: Center">Weapon Simulator</a>
+            }
+
+            @if (ViewData["menu1"] == null && ViewData["menu2"] == null && ViewData["menu1"] == null)
+            {
+                <a class="dropdown-item" style="text-align: Center;color:gainsboro">Working on something..</a>
+
+            }
+        </div>
+
+
+    </li>
+    <li>
+        <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+            Tournaments
+        </a>
+
+        <div class="dropdown-menu">
+            @if (ViewData["menu4"] != null){
+            <a class="dropdown-item" href="@Url.Action("List", "Tournament")" style="text-align: Center">Tournament List</a>
+            }
+
+            @if (ViewData["menu4"] == null)
+            {
+                <a class="dropdown-item" style="text-align: Center;color:gainsboro">Working on something..</a>
+            }
+        </div>
+    </li>
+     @if (ViewData["menu5"] != null)
+            {
+
+
+
+
+    <li>
+
+        <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+            Maps Info
+        </a>
+        <div class="dropdown-menu">
+
+
+
+
+                <a class="dropdown-item "  href="@Url.Action("pois", "map",new{id=1})" style="text-align: Center">
+                    World`s Edge
+                </a>
+                <a class="dropdown-item "  href="@Url.Action("pois", "map",new{id=2})" style="text-align: Center">
+                    Storm Point
+                </a>
+                <a class="dropdown-item " href="@Url.Action("pois", "map",new{id=3})" style="text-align: Center">
+                    Olympus
+                </a>
+                <a class="dropdown-item " href="@Url.Action("pois", "map",new{id=4})" style="text-align: Center">
+                    Broken Moon
+                </a>
+                <a class="dropdown-item " href="@Url.Action("pois", "map",new{id=5})" style="text-align: Center">
+                    Kings Canyon
+                </a>
+                <a class="dropdown-item " href="@Url.Action("pois", "map",new{id=6})" style="text-align: Center">
+                    E-District
+                </a>
+
+            
+        </div>
+
+
+        </li>
+        <li>
+
+            <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                Tutorials
+            </a>
+            <div class="dropdown-menu">
+
+
+
+
+               
+                   
+
+                
+
+                @if (ViewData["menu9"] != null)
+                {
+                    <a class="dropdown-item" href="@Url.Action("did_you_know", "tutorials")" style="text-align: Center">Did You Know</a>
+                }
+                @if (ViewData["menu10"] != null)
+                {
+                    <a class="dropdown-item" href="@Url.Action("tutorial_videos", "tutorials")" style="text-align: Center">Tutorial Videos</a>
+                }
+                @if (ViewData["menu11"] != null)
+                {
+                    <a class="dropdown-item" href="@Url.Action("Visual_tutorials", "tutorials")" style="text-align: Center">Visual Tutorials</a>
+                }
+
+                @if (ViewData["menu9"] == null && ViewData["menu10"] == null && ViewData["menu11"] == null)
+                {
+                    <a class="dropdown-item" style="text-align: Center;color:gainsboro">Working on something..</a>
+
+                }
+               
+            </div>
+
+
+        </li>
+    }
+</ul>

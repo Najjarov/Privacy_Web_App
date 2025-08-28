@@ -1,0 +1,243 @@
+﻿@using Privacy_Web_App.Models
+@model TournamentStatsViewModel
+
+@{
+    ViewBag.Title = @ViewBag.tourname + " Stats";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<section class="st-dark-bg">
+    <div class="st-height-b100 st-height-lg-b80"></div>
+    <div class="container">
+        <div class="st-section-heading st-style1">
+            <h4 class="st-section-heading-title">@ViewBag.tourname @ViewBag.touryear</h4>
+            <h2 class="st-section-heading-subtitle">@ViewBag.tourname @ViewBag.touryear</h2>
+        </div>
+        <div class="st-height-b25 st-height-lg-b25"></div>
+    </div>
+
+    <!-- Contact Container -->
+
+    <div class="container">
+
+        <div class="st-height-b100 st-height-lg-b80"> 
+            <a class="btn btn-outline-light" type="button" style="width:100%;margin-bottom:20px;" href="@Url.Action("list", "Tournament")">
+                Back to Tournament List
+            </a>
+        </div>
+    </div>
+</section>
+
+           
+
+        
+
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 ">
+            <nav>
+                <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-oa-stats" data-toggle="tab" href="#nav-overall" role="tab" aria-controls="nav-overall" aria-selected="true">Overall Stats</a>
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">@ViewBag.map1_name Stats</a>
+                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">@ViewBag.map2_name Stats</a>
+                   @*  <a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">About</a> *@
+                </div>
+            </nav>
+            <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-overall" role="tabpanel" aria-labelledby="nav-oa-stats">
+                    <div class="container">
+
+
+                        <div class="row">
+                            <table class="table table-hover table-transparent in-te-ta">
+                                <thead style="text-align:center; font-size:15px">
+                                    <tr>
+                                        <th scope="col" style="width: 5%">#</th>
+                                        <th scope="col" style="width: 20%">Team Name</th>
+                                        <th scope="col" style="width: 5%">Avg. PPG</th>
+                                        <th scope="col" style="width: 5%">Avg. KPG</th>
+                                        <th scope="col" style="width: 5%">Avg. PLPG</th>
+                                        <th scope="col" style="width: 5%">Win %</th>
+                                        <th scope="col" style="width: 5%">Top5 %</th>
+                                        <th scope="col" style="width: 5%">Top10 %</th>
+                                        <th scope="col" style="width: 6%">Matches</th>
+                                        <th scope="col" colspan="3" style="width: 39%">Legends</th>
+
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var tour in Model.overallStats)
+                                    {
+                                        <tr>
+                                            <td>@tour.tour_stand</td>
+                                            <td>@Html.ActionLink(@tour.Team_Name, "TeamStats", "tournament", new { Id = tour.Tour_id, teamid = tour.Team_Id})</td>
+                                            <td>@tour.av_po_per_game</td>
+                                            <td>@tour.av_kills_per_game</td>
+                                            <td>@tour.av_place_per_game</td>
+                                            <td>@($"{@tour.win_rate}{"%"}")</td>
+                                            <td>@($"{@tour.top_5_rate}{"%"}")</td>
+                                            <td>@($"{@tour.top_10_rate}{"%"}")</td>
+                                            <td>@tour.no_of_games</td>
+                                            <td style="text-align:left"><img src="/img/@tour.Legend_1_img" /> @tour.Legend_1_name</td>
+                                            <td style="text-align:left"><img src="/img/@tour.Legend_2_img" /> @tour.Legend_2_name</td>
+                                            <td style="text-align:left"><img src="/img/@tour.Legend_3_img" /> @tour.Legend_3_name</td>
+
+
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="container">
+
+
+                       
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    <div class="container">
+                    <div class="row">
+                        <table class="table table-hover table-transparent in-te-ta">
+                            <thead style="text-align:center; font-size:15px">
+                                <tr>
+                                        <th scope="col" style="width: 5%">#</th>
+                                    <th scope="col" style="width: 20%">Team Name</th>
+                                    
+                                    <th scope="col" style="width: 5%">Avg. PPG</th>
+                                    <th scope="col" style="width: 5%">Avg. KPG</th>
+                                    <th scope="col" style="width: 5%">Avg. PLPG</th>
+                                    <th scope="col" style="width: 5%">Win %</th>
+                                    <th scope="col" style="width: 5%">Top5 %</th>
+                                    <th scope="col" style="width: 5%">Top10 %</th>
+                                    <th scope="col" style="width: 6%">Matches</th>
+                                    <th scope="col" colspan="3" style="width: 39%">Legends</th>
+
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var mapstat in Model.mapStats1)
+                                {
+                                    <tr>
+                                            <td>@mapstat.tour_stand</td>
+                                        <td>@mapstat.Team_Name</td>
+                                       
+                                        <td>@mapstat.av_po_per_game</td>
+                                        <td>@mapstat.av_kills_per_game</td>
+                                        <td>@mapstat.av_place_per_game</td>
+                                        <td>@($"{@mapstat.win_rate}{"%"}")</td>
+                                        <td>@($"{@mapstat.top_5_rate}{"%"}")</td>
+                                        <td>@($"{@mapstat.top_10_rate}{"%"}")</td>
+                                        <td>@mapstat.no_of_games</td>
+                                        <td style="text-align:left"><img src="/img/@mapstat.Legend_1_img" /> @mapstat.Legend_1_name</td>
+                                        <td style="text-align:left"><img src="/img/@mapstat.Legend_2_img" /> @mapstat.Legend_2_name</td>
+                                        <td style="text-align:left"><img src="/img/@mapstat.Legend_3_img" /> @mapstat.Legend_3_name</td>
+
+
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                    <div class="container">
+                        <div class="row">
+                            <table class="table table-hover table-transparent in-te-ta">
+                                <thead style="text-align:center; font-size:15px">
+                                    <tr>
+                                        <th scope="col" style="width: 5%">#</th>
+                                        <th scope="col" style="width: 20%">Team Name</th>
+                                       
+                                        <th scope="col" style="width: 5%">Avg. PPG</th>
+                                        <th scope="col" style="width: 5%">Avg. KPG</th>
+                                        <th scope="col" style="width: 5%">Avg. PLPG</th>
+                                        <th scope="col" style="width: 5%">Win %</th>
+                                        <th scope="col" style="width: 5%">Top5 %</th>
+                                        <th scope="col" style="width: 5%">Top10 %</th>
+                                        <th scope="col" style="width: 6%">Matches</th>
+                                        <th scope="col" colspan="3" style="width: 39%">Legends</th>
+
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var mapstat in Model.mapStats2)
+                                    {
+                                        <tr>
+                                            <td>@mapstat.tour_stand</td>
+                                            <td>@mapstat.Team_Name</td>
+                                           
+                                            <td>@mapstat.av_po_per_game</td>
+                                            <td>@mapstat.av_kills_per_game</td>
+                                            <td>@mapstat.av_place_per_game</td>
+                                            <td>@($"{@mapstat.win_rate}{"%"}")</td>
+                                            <td>@($"{@mapstat.top_5_rate}{"%"}")</td>
+                                            <td>@($"{@mapstat.top_10_rate}{"%"}")</td>
+                                            <td>@mapstat.no_of_games</td>
+                                            <td style="text-align:left"><img src="/img/@mapstat.Legend_1_img" /> @mapstat.Legend_1_name</td>
+                                            <td style="text-align:left"><img src="/img/@mapstat.Legend_2_img" /> @mapstat.Legend_2_name</td>
+                                            <td style="text-align:left"><img src="/img/@mapstat.Legend_3_img" /> @mapstat.Legend_3_name</td>
+
+
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div> 
+                </div>
+               @*  <div class="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
+                    Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
+                </div> *@
+            </div>
+            <hr/>
+            <div class="row">
+                <h2 class="image__with--text__title mb-18 info_title">
+                    Tournament Meta Stats
+                </h2>
+
+
+                <table class="table table-hover table-transparent in-te-ta">
+                    <thead style="text-align:center; font-size:15px">
+                        <tr>
+                            <th scope="col" colspan="3" style="width: 75%">Legends</th>
+
+
+                            <th scope="col" style="width: 10%">Pick Rate</th>
+                            <th scope="col" style="width: 15%">Total</th>
+
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var leg in Model.metaStats)
+                        {
+                            <tr>
+
+                                <td style="text-align:left"><img src="/img/@leg.Legend_1_img" /> @leg.Legend_1_name</td>
+                                <td style="text-align:left"><img src="/img/@leg.Legend_2_img" /> @leg.Legend_2_name</td>
+                                <td style="text-align:left"><img src="/img/@leg.Legend_3_img" /> @leg.Legend_3_name</td>
+                                <td>@($"{@leg.pick_rate}{"%"}")</td>
+                                <td>@leg.total</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+     

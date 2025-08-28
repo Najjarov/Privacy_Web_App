@@ -1,0 +1,183 @@
+﻿@model IEnumerable<Privacy_Web_App.Models.DidYouKnowViewModel>
+
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<section id="portfolio">
+    <div class="st-height-b100 st-height-lg-b80"></div>
+    <div class="container">
+        <div class="st-section-heading st-style1">
+            <h4 class="st-section-heading-title">Did You Know</h4>
+            <h2 class="st-section-heading-subtitle">Did You Know</h2>
+        </div>
+        <div class="st-height-b25 st-height-lg-b25"></div>
+    </div>
+    <div class="container">
+        <div class="row">
+            @foreach (var did in Model)
+            {
+                <div class="col-lg-4 col-md-6">
+                    <div class="st-portfolio-single st-style1 st-lightgallery">
+                        <div class="st-portfolio-item">
+                            <a class="st-portfolio st-zoom st-lightbox-item video-btn" data-toggle="modal" data-src="@did.vid_link" data-target="#VidModal" style="cursor:pointer">
+                            @* <a type="button" class=" video-btn" data-toggle="modal" data-src="@did.vid_link" data-target="#VidModal"> *@
+                                <div class="st-portfolio-img st-zoom-in">
+                                    <img src="/img/did_you_know/@did.img" alt="portfolio">
+                                </div>
+                                <div class="st-portfolio-item-hover">
+                                   
+                                   @*  <h5>@did.Name</h5> *@
+                                   
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+    <div class="st-height-b100 st-height-lg-b80"></div>
+</section>
+@* <section id="portfolio">
+    <div class="st-height-b100 st-height-lg-b80"></div>
+    <div class="container">
+        <div class="st-section-heading st-style1">
+            <h4 class="st-section-heading-title">Did You Know</h4>
+            <h2 class="st-section-heading-subtitle">Did You Know</h2>
+        </div>
+        <div class="st-height-b25 st-height-lg-b25"></div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+        @foreach(var did in Model)
+        {
+
+
+                       
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="st-portfolio-single st-style1 st-lightgallery">
+                                        <div class="st-portfolio-item">
+                            <a type="button" class=" video-btn" data-toggle="modal" data-src="@did.vid_link" data-target="#VidModal">
+                                                <div class="st-portfolio-img st-zoom-in">
+                                    <img src="/img/did_you_know/@did.img" alt="portfolio">
+                                                </div>
+                                                <div class="st-portfolio-item-hover">
+                                                   
+                                                    <h5>@did.Name</h5>
+                                                    
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       
+            }
+        </div>
+    </div>
+    <div class="st-height-b100 st-height-lg-b80"></div>
+</section> *@
+       
+        <div class="modal fade" id="VidModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document" style="max-width:70vw">
+                <div class="modal-content">
+
+
+                    <div class="modal-body" style="background-color:#0a101e">
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span style="color:white" aria-hidden="true">&times;</span>
+                        </button>
+                        <!-- 16:9 aspect ratio -->
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="" id="video" allowscriptaccess="always" allow="autoplay"></iframe>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+</div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            // Gets the video src from the data-src on each button
+
+            var $videoSrc;
+            $('.video-btn').click(function () {
+                $videoSrc = $(this).data("src");
+            });
+
+
+
+
+            // when the modal is opened autoplay it
+            $('#VidModal').on('shown.bs.modal', function (e) {
+
+                // set the video src to autoplay and not to show related video. Youtube related video is like a box of chocolates... you never know what you're gonna get
+            $("#video").attr('src', $videoSrc + "?autoplay=1&amp;modestbranding=1&amp;showinfo=0;allow=autoplay");
+
+            })
+
+
+
+            // stop playing the youtube video when I close the modal
+            $('#VidModal').on('hide.bs.modal', function (e) {
+                // a poor man's stop video
+                $("#video").attr('src', $videoSrc);
+            })
+
+
+
+
+
+        });
+    </script>

@@ -1,0 +1,34 @@
+﻿<div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist" style="position: relative;z-index: 1;">
+
+
+    @foreach(var tab in Model.views)
+    {
+        string menu = "menu" + tab.id;
+        
+
+        @if (ViewData[menu] != null)
+        { 
+            
+            @if (@ViewBag.current == tab.action_name)
+            {
+
+                <a class="nav-item nav-link active" href="#">@tab.view_name
+                </a>
+            }
+            else
+            {
+                
+            
+            string link = tab.action_name;
+
+            <a class="nav-item nav-link" href="@Url.Action(link, "map", new { id = Model.map.Id })">@tab.view_name</a>
+            }}
+
+      
+     } 
+
+
+
+
+    
+</div>

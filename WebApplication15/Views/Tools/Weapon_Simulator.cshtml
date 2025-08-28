@@ -1,0 +1,969 @@
+﻿   @model TeamInfoModel
+
+@{
+    Layout = "~/Views/Shared/_Layout_tools.cshtml";
+    ViewData["Title"] = "Weapon Simulator";
+}
+
+
+
+
+<main>
+
+</main>
+
+
+<script type="text/javascript">
+    let rows1 = [];
+    let rows1_w = [];
+    let rows1_v = [];
+
+    let rows2_w = [];
+    let rows2_v = [];
+
+    let rows3_w = [];
+    let rows3_v = [];
+
+    let rows4_w = [];
+    let rows4_v = [];
+
+    let rows2 = [];
+    let rows3 = [];
+    let rows4 = [];
+
+    let input_rows1 = [];
+    let input_rows2 = [];
+    let input_rows3 = [];
+    let input_rows4 = [];
+
+    let edit;
+    let btn1;
+    let btn2;
+    let btn3;
+    let btn4;
+
+    function setup() {
+        createCanvas(1920, 3780);
+        background('rgb(7,13,26)');
+        stroke(0);
+        strokeWeight(1);
+        rows1.push(["R301", "200", "810", "1.75", "13", "18", "20", "25", "28"]);
+        rows1.push(["Flatline", "200", "600", "1.75", "18", "20", "25", "28", "30"]);
+
+        rows1.push(["Hemlock-Burst", "200", "380", "1.75", "20", "18", "24", "27", "30"]);
+
+        rows1.push(["Nemesis", "200", "451", "1.75", "16", "20", "24", "28", "32"]);
+        rows1.push(["Nemesis-Charged", "200", "582", "1.75", "16", "20", "24", "28", "32"]);
+        rows1.push(["Havoc", "200", "672", "1.75", "18", "20", "24", "28", "32"]);
+        //rows1.push(["", "", "", "", "", "", "", "", ""]);
+
+        ////////////////////////////////////////////////////////
+        rows2.push(["R99", "200", "1080", "1.25", "11", "17", "20", "23", "26"]);
+        rows2.push(["CAR", "200", "930", "1.25", "12", "19", "21", "23", "26"]);
+        rows2.push(["Volt", "200", "720", "1.25", "15", "19", "21", "23", "26"]);
+        rows2.push(["Alternator-Disrputor", "200", "600", "1.25", "17.5", "19", "22", "25", "27"]);
+        rows2.push(["Alternator-No Disruptor", "200", "600", "1.25", "16", "19", "22", "25", "27"]);
+        rows2.push(["Prowler-Burst", "200", "537", "1.2", "15", "20", "25", "30", "35"]);
+        rows2.push(["RE-45-NoHammer", "200", "780", "1.5", "12", "16", "19", "22", "25"]);
+
+
+        rows2.push(["RE-45-WithHammer", "200", "780", "1.5", "14", "16", "19", "22", "25"]);
+        rows2.push(["Mozam-NoBolt", "200", "132", "1.25", "45", "6", "6", "6", "6"]);
+
+        rows2.push(["Mozam-White", "200", "152", "1.25", "45", "6", "6", "6", "6"]);
+        rows2.push(["Mozam-Blue", "200", "165", "1.25", "45", "6", "6", "6", "6"]);
+        rows2.push(["Mozam-Purp", "200", "178", "1.25", "45", "6", "6", "6", "6"]);
+        rows2.push(["Mozam-NoBolt-Ham", "200", "132", "1.25", "52.5", "6", "6", "6", "6"]);
+        rows2.push(["Mozam-White-Ham", "200", "152", "1.25", "52.5", "6", "6", "6", "6"]);
+        rows2.push(["Mozam-Blue-Ham", "200", "165", "1.25", "52.5", "6", "6", "6", "6"]);
+        rows2.push(["Mozam-Purp-Ham", "200", "178", "1.25", "52.5", "6", "6", "6", "6"]);
+        /////////////////////////////////////////////////////////////
+        rows3.push(["Devotion", "200", "300", "1.5", "16", "54", "54", "54", "54"]);
+        rows3.push(["Devotion-ramped up", "200", "900", "1.5", "16", "54", "54", "54", "54"]);
+
+        rows3.push(["L-STAR", "200", "600", "1.5", "17", "500", "500", "500", "500"]);
+        rows3.push(["Spitfire", "200", "540", "1.5", "18", "35", "40", "45", "50"]);
+
+        rows3.push(["Rampage ", "200", "300", "1.5", "26", "28", "32", "36", "40"]);
+        rows3.push(["Rampage -Charged", "200", "390", "1.5", "26", "28", "32", "36", "40"]);
+        ////////////////////////////////////////////////////
+        rows4.push(["30-30", "200", "144", "1.75", "46", "5", "6", "8", "10"]);
+        rows4.push(["G7-Scout", "200", "240", "1.75", "33", "10", "15", "18", "20"]);
+        rows4.push(["TripleTake", "200", "81", "1.75", "63", "6", "7", "8", "10"]);
+        rows4.push(["Bow", "200", "180", "1.75", "70", "20", "20", "20", "20"]);
+
+        input_rows1 = [];
+        input_rows2 = [];
+        input_rows3 = [];
+        input_rows4 = [];
+        edit = 0;
+        
+
+    }
+
+    function simalarity_rows1() {
+        let out_fun = true;
+        if (input_rows1.length != rows1.length) {
+            out_fun = false;
+            return false
+        }
+        //
+        for (let i = 0; i < input_rows1.length; i++) {
+            //print("AA", i, input_rows1[i].legnth);
+            for (let j = 0; j < 9; j++) {
+                //print("BB", i, j);
+                //print(input_rows1[i][j].value(), rows1[i][j])
+                if (input_rows1[i][j].value() !== rows1[i][j]) {
+                    //print("CC",input_rows1[i][j].value(), rows1[i][j]);
+                    rows1[i][j] = input_rows1[i][j].value();
+                    //print(rows1[i][j]);
+                    out_fun = false;
+                    return false;
+                }
+            }
+        }
+        return out_fun;
+    }
+
+    function simalarity_rows2() {
+        let out_fun = true;
+        if (input_rows2.length != rows2.length) {
+            out_fun = false;
+            return false
+        }
+        //
+        for (let i = 0; i < input_rows2.length; i++) {
+            //print("AA", i, input_rows2[i].legnth);
+            for (let j = 0; j < 9; j++) {
+                //print("BB", i, j);
+                //print(input_rows1[i][j].value(), rows1[i][j])
+                if (input_rows2[i][j].value() !== rows2[i][j]) {
+                    //print("CC",input_rows2[i][j].value(), rows2[i][j]);
+                    rows2[i][j] = input_rows2[i][j].value();
+                    //print(rows2[i][j]);
+                    out_fun = false;
+                    return false;
+                }
+            }
+        }
+        return out_fun;
+    }
+
+
+    function simalarity_rows3() {
+        let out_fun = true;
+        if (input_rows3.length != rows3.length) {
+            out_fun = false;
+            return false
+        }
+        //
+        for (let i = 0; i < input_rows3.length; i++) {
+            //print("AA", i, input_rows3[i].legnth);
+            for (let j = 0; j < 9; j++) {
+                //print("BB", i, j);
+                //print(input_rows3[i][j].value(), rows3[i][j])
+                if (input_rows3[i][j].value() !== rows3[i][j]) {
+                    //print("CC",input_rows2[i][j].value(), rows2[i][j]);
+                    rows3[i][j] = input_rows3[i][j].value();
+                    //print(rows3[i][j]);
+                    out_fun = false;
+                    return false;
+                }
+            }
+        }
+        return out_fun;
+    }
+
+
+    function simalarity_rows4() {
+        let out_fun = true;
+        if (input_rows4.length != rows4.length) {
+            out_fun = false;
+            return false
+        }
+        //
+        for (let i = 0; i < input_rows4.length; i++) {
+            //print("AA", i, input_rows4[i].legnth);
+            for (let j = 0; j < 9; j++) {
+                //print("BB", i, j);
+                //print(input_rows4[i][j].value(), rows4[i][j])
+                if (input_rows4[i][j].value() !== rows4[i][j]) {
+                    //print("CC",input_rows4[i][j].value(), rows4[i][j]);
+                    rows4[i][j] = input_rows4[i][j].value();
+                    //print(rows4[i][j]);
+                    out_fun = false;
+                    return false;
+                }
+            }
+        }
+        return out_fun;
+    }
+
+    function add1() {
+        rows1.push(["", "", "", "", "", "", "", "", ""]);
+    }
+
+    function add2() {
+        rows2.push(["", "", "", "", "", "", "", "", ""]);
+    }
+
+    function add3() {
+        rows3.push(["", "", "", "", "", "", "", "", ""]);
+    }
+
+    function add4() {
+        rows4.push(["", "", "", "", "", "", "", "", ""]);
+    }
+    function draw() {
+        // simalarity_rows1();
+        //print(frameCount/100);
+        if ((!simalarity_rows1() | !simalarity_rows2() | !simalarity_rows3() | !simalarity_rows4())) {
+            edit = 1;
+        }
+        if (frameCount % 250 == 0 & edit == 1) {
+            edit = 0;
+            print("not");
+            background('rgb(7,13,26)');
+            // for(let i=0;i<input_rows1.length;i++){
+            //   for(let j=1; j<input_rows1[i].legnth;j++){
+            //   rows1[i][j] = input_rows1[i][j].value()
+            // }
+            // }
+            let start_x = 5;
+            let start_y = 60;
+            input_rows1 = [];
+            input_rows2 = [];
+            input_rows3 = [];
+            input_rows4 = [];
+
+            //print(rows1.length);
+            //fill(218, 165, 32); // RGB color for blue
+            fill(218, 165, 32);
+            textSize(32);
+            text("AR Information", 900, start_y - 30);
+            textSize(12);
+            btn1 = createButton("Add AR");
+            btn1.position(50, 85);
+            btn1.mousePressed(add1);
+            btn1.size(100, 30);
+            btn1.style('background', 'rgb(218 165 32)');
+            text("Weapon", 45, start_y - 8);
+            text("Enemy Health", 135, start_y - 8);
+            text("RPM", 245, start_y - 8);
+            text("Headshot Mult", 310, start_y - 8);
+            text("DPB", 427, start_y - 8);
+            text("Base Mag", 500, start_y - 8);
+            text("Grey Mag", 590, start_y - 8);
+            text("Blue Mag", 682, start_y - 8);
+            text("Purp Mag", 768, start_y - 8);
+            text("DPS", 870, start_y - 8);
+            text("DPM Base Mag", 935, start_y - 8);
+            text("DPM Grey", 1040, start_y - 8);
+            text("DPM Blue", 1135, start_y - 8);
+            text("DPM Purp", 1230, start_y - 8);
+
+            text("TTK - Seconds", 1347, start_y - 8);
+
+            text("Accuracy R. (inc. 2 headshots) No Mag", 1465, start_y - 8);
+
+            text("Accuracy R. (if no headshots)", 1710, start_y - 8);
+
+            for (let i = 0; i < rows1.length; i++) {
+                textSize(12);
+                input_rows1.push([]);
+                input_rows1[i].push(createInput(rows1[i][0]));
+                input_rows1[i][0].position(start_x, start_y+80);
+                input_rows1[i][0].size(110, 15);
+                input_rows1[i][0].style('text-align', 'center'); input_rows1[i][0].style('background', 'rgb(9 57 109)'); input_rows1[i][0].style('border', '0'); input_rows1[i][0].style('color', 'white'); input_rows1[i][0].style('font-size', '12px');
+                start_x += 120;
+                for (let j = 1; j < 9; j++) {
+                    input_rows1[i].push(createInput(rows1[i][j]));
+                    input_rows1[i][j].position(start_x, start_y+80);
+                    input_rows1[i][j].size(80, 15);
+                    input_rows1[i][j].style('text-align', 'center'); input_rows1[i][j].style('background', 'rgb(178 216 255)'); input_rows1[i][j].style('border', '0');
+                    start_x += 90;
+                }
+                fill(218, 165, 32);
+                rect(start_x, start_y, 80, 18);
+                let dbs = round(float(rows1[i][2]) / 60 * float(rows1[i][4]));
+                //print("dbs",dbs, float(rows1[i][2]));
+                fill(0);
+                text(dbs, start_x + 25, start_y + 13);
+                start_x += 90;
+
+                fill(218, 165, 32);
+                rect(start_x, start_y, 80, 18);
+                let dpm1 = (float(rows1[i][4]) * float(rows1[i][5])).toFixed(1)
+                fill(0);
+                text(dpm1, start_x + 25, start_y + 13);
+                start_x += 95;
+
+                fill(218, 165, 32);
+                rect(start_x, start_y, 80, 18);
+                let dpm2 = (float(rows1[i][4]) * float(rows1[i][6])).toFixed(1)
+                fill(0);
+                text(dpm2, start_x + 25, start_y + 13);
+                start_x += 95;
+
+                fill(218, 165, 32);
+                rect(start_x, start_y, 80, 18);
+                let dpm3 = (float(rows1[i][4]) * float(rows1[i][7])).toFixed(1)
+                fill(0);
+                text(dpm3, start_x + 25, start_y + 13);
+                start_x += 95;
+
+                fill(218, 165, 32);
+                rect(start_x, start_y, 80, 18);
+                let dpm4 = (float(rows1[i][4]) * float(rows1[i][8])).toFixed(1)
+                fill(0);
+                text(dpm4, start_x + 25, start_y + 13);
+                start_x += 130;
+
+                fill(218, 165, 32);
+                rect(start_x, start_y, 80, 18);
+                let ttk = (float(rows1[i][1]) / float(dbs)).toFixed(2)
+                fill(0);
+                text(ttk, start_x + 25, start_y + 13);
+                start_x += 205;
+
+                fill(218, 165, 32);
+                rect(start_x, start_y, 80, 18);
+                let s = float(rows1[i][3]) * float(rows1[i][4]) * 2;
+                let w = (float(rows1[i][1]) - s) / float(rows1[i][4]) + 2;
+                let v = float(rows1[i][1]) / float(rows1[i][4]);
+                rows1_w.push(w);
+                rows1_v.push(v);
+                //print(v,w);
+                fill(218, 165, 32);
+                let x = round(((w / float(rows1[i][5])).toFixed(2)) * 100);
+                let y = round(((v / float(rows1[i][5])).toFixed(2)) * 100);
+                fill(0);
+                text(x + "%", start_x + 25, start_y + 13);
+                start_x += 220;
+                //print(start_x);
+                fill(218, 165, 32);
+                rect(start_x, start_y, 80, 18);
+                fill(0);
+                text(y + "%", start_x + 25, start_y + 13);
+
+                start_x = 5;
+                start_y += 20;
+
+
+            }
+            fill(218, 165, 32);
+            start_y += 30;
+            text("Accuracy R. (inc. 2 headshots) Grey Mag", 1465, start_y - 8);
+
+            text("Accuracy R. (No headshots) Grey Mag", 1710, start_y - 8);
+            for (let i = 0; i < rows1.length; i++) {
+                fill(218, 165, 32);
+                rect(1555, start_y, 80, 18);
+                let x = round(((rows1_w[i] / float(rows1[i][6])).toFixed(2)) * 100);
+                fill(0);
+                text(x + "%", 1555 + 25, start_y + 13);
+
+                fill(218, 165, 32);
+                rect(1775, start_y, 80, 18);
+                let y = round(((rows1_v[i] / float(rows1[i][6])).toFixed(2)) * 100);
+                fill(0);
+                text(y + "%", 1775 + 25, start_y + 13);
+
+                start_y += 20;
+            }
+            fill(218, 165, 32);
+
+            start_y += 30;
+            text("Accuracy R. (inc. 2 headshots) Blue Mag", 1465, start_y - 8);
+
+            text("Accuracy R. (No headshots) Blue Mag", 1710, start_y - 8);
+            for (let i = 0; i < rows1.length; i++) {
+                fill(218, 165, 32);
+                rect(1555, start_y, 80, 18);
+                let x = round(((rows1_w[i] / float(rows1[i][7])).toFixed(2)) * 100);
+                fill(0);
+                text(x + "%", 1555 + 25, start_y + 13);
+
+                fill(218, 165, 32);
+                rect(1775, start_y, 80, 18);
+                let y = round(((rows1_v[i] / float(rows1[i][7])).toFixed(2)) * 100);
+                fill(0);
+                text(y + "%", 1775 + 25, start_y + 13);
+
+                start_y += 20;
+            }
+
+
+            fill(218, 165, 32);
+            start_y += 30;
+            text("Accuracy R. (inc. 2 headshots) Purp Mag", 1465, start_y - 8);
+
+            text("Accuracy R. (No headshots) Purp Mag", 1710, start_y - 8);
+            for (let i = 0; i < rows1.length; i++) {
+                fill(218, 165, 32);
+                rect(1555, start_y, 80, 18);
+                let x = round(((rows1_w[i] / float(rows1[i][8])).toFixed(2)) * 100);
+                fill(0);
+                text(x + "%", 1555 + 25, start_y + 13);
+
+                fill(218, 165, 32);
+                rect(1775, start_y, 80, 18);
+                let y = round(((rows1_v[i] / float(rows1[i][8])).toFixed(2)) * 100);
+                fill(0);
+                text(y + "%", 1775 + 25, start_y + 13);
+
+                start_y += 20;
+            }
+            fill(218, 165, 32);
+            print(start_y);
+            start_y += 70;
+            start_x = 5;
+
+            /////////////////////////////////////////////////////////////
+            textSize(32);
+            
+            text("SMG Information", 900, start_y - 30);
+            textSize(12);
+           
+            btn2 = createButton("Add SMG");
+            btn2.position(200, 85);
+            btn2.mousePressed(add2);
+            btn2.size(100, 30);
+            btn2.style('background', 'rgb(218 165 32)');
+            text("Weapon", 45, start_y - 8);
+            text("Enemy Health", 135, start_y - 8);
+            text("RPM", 245, start_y - 8);
+            text("Headshot Mult", 310, start_y - 8);
+            text("DPB", 427, start_y - 8);
+            text("Base Mag", 500, start_y - 8);
+            text("Grey Mag", 590, start_y - 8);
+            text("Blue Mag", 682, start_y - 8);
+            text("Purp Mag", 768, start_y - 8);
+            text("DPS", 870, start_y - 8);
+            text("DPM Base Mag", 935, start_y - 8);
+            text("DPM Grey", 1040, start_y - 8);
+            text("DPM Blue", 1135, start_y - 8);
+            text("DPM Purp", 1230, start_y - 8);
+
+            text("TTK - Seconds", 1347, start_y - 8);
+
+            text("Accuracy R. (inc. 2 headshots) No Mag", 1465, start_y - 8);
+
+            text("Accuracy R. (if no headshots)", 1710, start_y - 8);
+
+            for (let i = 0; i < rows2.length; i++) {
+                fill(218, 165, 32);
+                input_rows2.push([]);
+                input_rows2[i].push(createInput(rows2[i][0]));
+                input_rows2[i][0].position(start_x, start_y+80);
+                input_rows2[i][0].size(110, 15);
+                input_rows2[i][0].style('text-align', 'center'); input_rows2[i][0].style('background', 'rgb(9 57 109)'); input_rows2[i][0].style('border', '0'); input_rows2[i][0].style('color', 'white'); input_rows2[i][0].style('font-size', '12px');
+                start_x += 120;
+                for (let j = 1; j < 9; j++) {
+                    input_rows2[i].push(createInput(rows2[i][j]));
+                    input_rows2[i][j].position(start_x, start_y+80);
+                    input_rows2[i][j].size(80, 15);
+                    input_rows2[i][j].style('text-align', 'center'); input_rows2[i][j].style('background', 'rgb(178 216 255)'); input_rows2[i][j].style('border', '0');
+                    start_x += 90;
+                }
+                fill(218, 165, 32);
+                rect(start_x, start_y, 80, 18);
+                let dbs = round(float(rows2[i][2]) / 60 * float(rows2[i][4]));
+                //print("dbs",dbs, float(rows2[i][2]));
+                fill(0);
+                text(dbs, start_x + 25, start_y + 13);
+                start_x += 90;
+
+                fill(218, 165, 32);
+                rect(start_x, start_y, 80, 18);
+                let dpm1 = (float(rows2[i][4]) * float(rows2[i][5])).toFixed(1)
+                fill(0);
+                text(dpm1, start_x + 25, start_y + 13);
+                start_x += 95;
+
+                fill(218, 165, 32);
+                rect(start_x, start_y, 80, 18);
+                let dpm2 = (float(rows2[i][4]) * float(rows2[i][6])).toFixed(1)
+                fill(0);
+                text(dpm2, start_x + 25, start_y + 13);
+                start_x += 95;
+
+                fill(218, 165, 32);
+                rect(start_x, start_y, 80, 18);
+                let dpm3 = (float(rows2[i][4]) * float(rows2[i][7])).toFixed(1)
+                fill(0);
+                text(dpm3, start_x + 25, start_y + 13);
+                start_x += 95;
+                
+                fill(218, 165, 32);
+                rect(start_x, start_y, 80, 18);
+                let dpm4 = (float(rows2[i][4]) * float(rows2[i][8])).toFixed(1)
+                fill(0);
+                text(dpm4, start_x + 25, start_y + 13);
+                start_x += 130;
+
+                fill(218, 165, 32);
+                rect(start_x, start_y, 80, 18);
+                let ttk = (float(rows2[i][1]) / float(dbs)).toFixed(2)
+                fill(0);
+                text(ttk, start_x + 25, start_y + 13);
+                start_x += 205;
+
+
+                fill(218, 165, 32);
+                rect(start_x, start_y, 80, 18);
+                let s = float(rows2[i][3]) * float(rows2[i][4]) * 2;
+                let w = (float(rows2[i][1]) - s) / float(rows2[i][4]) + 2;
+                let v = float(rows2[i][1]) / float(rows2[i][4]);
+                rows2_w.push(w);
+                rows2_v.push(v);
+                //print(v,w);
+                let x = round(((w / float(rows2[i][5])).toFixed(2)) * 100);
+                let y = round(((v / float(rows2[i][5])).toFixed(2)) * 100);
+                fill(0);
+                text(x + "%", start_x + 25, start_y + 13);
+                start_x += 220;
+                fill(218, 165, 32);
+                //print(start_x);
+                rect(start_x, start_y, 80, 18);
+                fill(0);
+                text(y + "%", start_x + 25, start_y + 13);
+
+                start_x = 5;
+                start_y += 20;
+
+
+            }
+            fill(218, 165, 32);
+            start_y += 30;
+            text("Accuracy R. (inc. 2 headshots) Grey Mag", 1465, start_y - 8);
+
+            text("Accuracy R. (No headshots) Grey Mag", 1710, start_y - 8);
+            for (let i = 0; i < rows2.length; i++) {
+                fill(218, 165, 32);
+                rect(1555, start_y, 80, 18);
+                let x = round(((rows2_w[i] / float(rows2[i][6])).toFixed(2)) * 100);
+                fill(0);
+                text(x + "%", 1555 + 25, start_y + 13);
+
+                fill(218, 165, 32);
+                rect(1775, start_y, 80, 18);
+                let y = round(((rows2_v[i] / float(rows2[i][6])).toFixed(2)) * 100);
+                fill(0);
+                text(y + "%", 1775 + 25, start_y + 13);
+
+                start_y += 20;
+            }
+
+            fill(218, 165, 32);
+            start_y += 30;
+            text("Accuracy R. (inc. 2 headshots) Blue Mag", 1465, start_y - 8);
+
+            text("Accuracy R. (No headshots) Blue Mag", 1710, start_y - 8);
+            for (let i = 0; i < rows2.length; i++) {
+                fill(218, 165, 32);
+                rect(1555, start_y, 80, 18);
+                let x = round(((rows2_w[i] / float(rows2[i][7])).toFixed(2)) * 100);
+                fill(0);
+                text(x + "%", 1555 + 25, start_y + 13);
+
+                fill(218, 165, 32);
+                rect(1775, start_y, 80, 18);
+                let y = round(((rows2_v[i] / float(rows2[i][7])).toFixed(2)) * 100);
+                fill(0);
+                text(y + "%", 1775 + 25, start_y + 13);
+
+                start_y += 20;
+            }
+
+
+            fill(218, 165, 32);
+            start_y += 30;
+            text("Accuracy R. (inc. 2 headshots) Purp Mag", 1465, start_y - 8);
+
+            text("Accuracy R. (No headshots) Purp Mag", 1710, start_y - 8);
+            for (let i = 0; i < rows2.length; i++) {
+                fill(218, 165, 32);
+                rect(1555, start_y, 80, 18);
+                let x = round(((rows2_w[i] / float(rows2[i][8])).toFixed(2)) * 100);
+                fill(0);
+                text(x + "%", 1555 + 25, start_y + 13);
+
+                fill(218, 165, 32);
+                rect(1775, start_y, 80, 18);
+                let y = round(((rows2_v[i] / float(rows2[i][8])).toFixed(2)) * 100);
+                fill(0);
+                text(y + "%", 1775 + 25, start_y + 13);
+
+                start_y += 20;
+            }
+            print(start_y);
+            start_y += 70;
+            start_x = 5;
+            fill(218, 165, 32);
+
+            /////////////////////////////////////////////////////////////
+            textSize(32);
+            text("LMG Information", 900, start_y - 30);
+            textSize(12);
+            btn3 = createButton("Add LMG");
+            btn3.position(350, 85);
+            btn3.mousePressed(add3);
+            btn3.size(100, 30);
+            btn3.style('background', 'rgb(218 165 32)');
+            text("Weapon", 45, start_y - 8);
+            text("Enemy Health", 135, start_y - 8);
+            text("RPM", 245, start_y - 8);
+            text("Headshot Mult", 310, start_y - 8);
+            text("DPB", 427, start_y - 8);
+            text("Base Mag", 500, start_y - 8);
+            text("Grey Mag", 590, start_y - 8);
+            text("Blue Mag", 682, start_y - 8);
+            text("Purp Mag", 768, start_y - 8);
+            text("DPS", 870, start_y - 8);
+            text("DPM Base Mag", 935, start_y - 8);
+            text("DPM Grey", 1040, start_y - 8);
+            text("DPM Blue", 1135, start_y - 8);
+            text("DPM Purp", 1230, start_y - 8);
+
+            text("TTK - Seconds", 1347, start_y - 8);
+
+            text("Accuracy R. (inc. 2 headshots) No Mag", 1465, start_y - 8);
+
+            text("Accuracy R. (if no headshots)", 1710, start_y - 8);
+
+            for (let i = 0; i < rows3.length; i++) {
+
+                input_rows3.push([]);
+                input_rows3[i].push(createInput(rows3[i][0]));
+                input_rows3[i][0].position(start_x, start_y+80);
+                input_rows3[i][0].size(110, 15);
+                input_rows3[i][0].style('text-align', 'center'); input_rows3[i][0].style('background', 'rgb(9 57 109)'); input_rows3[i][0].style('border', '0'); input_rows3[i][0].style('color', 'white'); input_rows3[i][0].style('font-size', '12px');
+                start_x += 120;
+                for (let j = 1; j < 9; j++) {
+                    input_rows3[i].push(createInput(rows3[i][j]));
+                    input_rows3[i][j].position(start_x, start_y+80);
+                    input_rows3[i][j].size(80, 15);
+                    input_rows3[i][j].style('text-align', 'center'); input_rows3[i][j].style('background', 'rgb(178 216 255)'); input_rows3[i][j].style('border', '0');
+                    start_x += 90;
+                }
+                fill(218, 165, 32);
+                rect(start_x, start_y, 80, 18);
+                let dbs = round(float(rows3[i][2]) / 60 * float(rows3[i][4]));
+                //print("dbs",dbs, float(rows3[i][2]));
+                fill(0);
+
+                text(dbs, start_x + 25, start_y + 13);
+                start_x += 90;
+
+                fill(218, 165, 32);
+                rect(start_x, start_y, 80, 18);
+                let dpm1 = (float(rows3[i][4]) * float(rows3[i][5])).toFixed(1)
+                fill(0);
+                text(dpm1, start_x + 25, start_y + 13);
+                start_x += 95;
+
+                fill(218, 165, 32);
+                rect(start_x, start_y, 80, 18);
+                let dpm2 = (float(rows3[i][4]) * float(rows3[i][6])).toFixed(1)
+                fill(0);
+                text(dpm2, start_x + 25, start_y + 13);
+                start_x += 95;
+
+                fill(218, 165, 32);
+                rect(start_x, start_y, 80, 18);
+                let dpm3 = (float(rows3[i][4]) * float(rows3[i][7])).toFixed(1)
+                fill(0);
+                text(dpm3, start_x + 25, start_y + 13);
+                start_x += 95;
+
+                fill(218, 165, 32);
+                rect(start_x, start_y, 80, 18);
+                let dpm4 = (float(rows3[i][4]) * float(rows3[i][8])).toFixed(1)
+                fill(0);
+                text(dpm4, start_x + 25, start_y + 13);
+                start_x += 130;
+
+                fill(218, 165, 32);
+                rect(start_x, start_y, 80, 18);
+                let ttk = (float(rows3[i][1]) / float(dbs)).toFixed(2)
+                fill(0);
+                text(ttk, start_x + 25, start_y + 13);
+                start_x += 205;
+
+                fill(218, 165, 32);
+                rect(start_x, start_y, 80, 18);
+                let s = float(rows3[i][3]) * float(rows3[i][4]) * 2;
+                let w = (float(rows3[i][1]) - s) / float(rows3[i][4]) + 2;
+                let v = float(rows3[i][1]) / float(rows3[i][4]);
+                rows3_w.push(w);
+                rows3_v.push(v);
+                //print(v,w);
+                fill(218, 165, 32);
+                let x = round(((w / float(rows3[i][5])).toFixed(2)) * 100);
+                let y = round(((v / float(rows3[i][5])).toFixed(2)) * 100);
+                fill(0);
+                text(x + "%", start_x + 25, start_y + 13);
+                start_x += 220;
+                //print(start_x);
+                fill(218, 165, 32);
+                rect(start_x, start_y, 80, 18);
+                fill(0);
+                text(y + "%", start_x + 25, start_y + 13);
+
+                start_x = 5;
+                start_y += 20;
+
+
+            }
+            fill(218, 165, 32);
+            start_y += 30;
+            text("Accuracy R. (inc. 2 headshots) Grey Mag", 1465, start_y - 8);
+
+            text("Accuracy R. (No headshots) Grey Mag", 1710, start_y - 8);
+            for (let i = 0; i < rows3.length; i++) {
+                fill(218, 165, 32);
+                rect(1555, start_y, 80, 18);
+                let x = round(((rows3_w[i] / float(rows3[i][6])).toFixed(2)) * 100);
+                fill(0);
+                text(x + "%", 1555 + 25, start_y + 13);
+
+                fill(218, 165, 32);
+                rect(1775, start_y, 80, 18);
+                let y = round(((rows3_v[i] / float(rows3[i][6])).toFixed(2)) * 100);
+                fill(0);
+                text(y + "%", 1775 + 25, start_y + 13);
+
+                start_y += 20;
+            }
+
+            fill(218, 165, 32);
+            start_y += 30;
+            text("Accuracy R. (inc. 2 headshots) Blue Mag", 1465, start_y - 8);
+
+            text("Accuracy R. (No headshots) Blue Mag", 1710, start_y - 8);
+            for (let i = 0; i < rows3.length; i++) {
+                fill(218, 165, 32);
+                rect(1555, start_y, 80, 18);
+                let x = round(((rows3_w[i] / float(rows3[i][7])).toFixed(2)) * 100);
+                fill(0);
+                text(x + "%", 1555 + 25, start_y + 13);
+
+                fill(218, 165, 32);
+                rect(1775, start_y, 80, 18);
+                let y = round(((rows3_v[i] / float(rows3[i][7])).toFixed(2)) * 100);
+                fill(0);
+                text(y + "%", 1775 + 25, start_y + 13);
+
+                start_y += 20;
+            }
+
+
+            fill(218, 165, 32);
+            start_y += 30;
+            text("Accuracy R. (inc. 2 headshots) Purp Mag", 1465, start_y - 8);
+
+            text("Accuracy R. (No headshots) Purp Mag", 1710, start_y - 8);
+            for (let i = 0; i < rows3.length; i++) {
+                fill(218, 165, 32);
+                rect(1555, start_y, 80, 18);
+                let x = round(((rows3_w[i] / float(rows3[i][8])).toFixed(2)) * 100);
+                fill(0);
+                text(x + "%", 1555 + 25, start_y + 13);
+
+                fill(218, 165, 32);
+                rect(1775, start_y, 80, 18);
+                let y = round(((rows3_v[i] / float(rows3[i][8])).toFixed(2)) * 100);
+                fill(0);
+                text(y + "%", 1775 + 25, start_y + 13);
+
+                start_y += 20;
+            }
+            print(start_y);
+            start_y += 70;
+            start_x = 5;
+
+            fill(218, 165, 32);
+            /////////////////////////////////////////////////////////////
+            textSize(32);
+            text("Marksman Information", 900, start_y - 30);
+            textSize(12);
+            btn4 = createButton("Add Marksman");
+            btn4.position(500, 85);
+            btn4.mousePressed(add4);
+            btn4.size(150, 30);
+            btn4.style('background', 'rgb(218 165 32)');
+            text("Weapon", 45, start_y - 8);
+            text("Enemy Health", 135, start_y - 8);
+            text("RPM", 245, start_y - 8);
+            text("Headshot Mult", 310, start_y - 8);
+            text("DPB", 427, start_y - 8);
+            text("Base Mag", 500, start_y - 8);
+            text("Grey Mag", 590, start_y - 8);
+            text("Blue Mag", 682, start_y - 8);
+            text("Purp Mag", 768, start_y - 8);
+            text("DPS", 870, start_y - 8);
+            text("DPM Base Mag", 935, start_y - 8);
+            text("DPM Grey", 1040, start_y - 8);
+            text("DPM Blue", 1135, start_y - 8);
+            text("DPM Purp", 1230, start_y - 8);
+
+            text("TTK - Seconds", 1347, start_y - 8);
+
+            text("Accuracy R. (inc. 2 headshots) No Mag", 1465, start_y - 8);
+
+            text("Accuracy R. (if no headshots)", 1710, start_y - 8);
+
+            for (let i = 0; i < rows4.length; i++) {
+                input_rows4.push([]);
+                input_rows4[i].push(createInput(rows4[i][0]));
+                input_rows4[i][0].position(start_x, start_y+80);
+                input_rows4[i][0].size(110, 15);
+                input_rows4[i][0].style('text-align', 'center'); input_rows4[i][0].style('background', 'rgb(9 57 109)'); input_rows4[i][0].style('color', 'white'); input_rows4[i][0].style('border', '0'); input_rows4[i][0].style('font-size', '12px');
+                start_x += 120;
+                for (let j = 1; j < 9; j++) {
+                    input_rows4[i].push(createInput(rows4[i][j]));
+                    input_rows4[i][j].position(start_x, start_y+80);
+                    input_rows4[i][j].size(80, 15);
+                    input_rows4[i][j].style('text-align', 'center'); input_rows4[i][j].style('background', 'rgb(178 216 255)'); input_rows4[i][j].style('border', '0');
+                    start_x += 90;
+                }
+                fill(218, 165, 32);
+                rect(start_x, start_y, 80, 18);
+                let dbs = round(float(rows4[i][2]) / 60 * float(rows4[i][4]));
+                //print("dbs",dbs, float(rows4[i][2]));
+                fill(0);
+                text(dbs, start_x + 25, start_y + 13);
+                start_x += 90;
+
+                 fill(218, 165, 32);
+                rect(start_x, start_y, 80, 18);
+                let dpm1 = (float(rows4[i][4]) * float(rows4[i][5])).toFixed(1)
+                fill(0);
+                text(dpm1, start_x + 25, start_y + 13);
+                start_x += 95;
+
+                fill(218, 165, 32);
+                rect(start_x, start_y, 80, 18);
+                let dpm2 = (float(rows4[i][4]) * float(rows4[i][6])).toFixed(1)
+                fill(0);
+                text(dpm2, start_x + 25, start_y + 13);
+                start_x += 95;
+
+                fill(218, 165, 32);
+                rect(start_x, start_y, 80, 18);
+                let dpm3 = (float(rows4[i][4]) * float(rows4[i][7])).toFixed(1)
+                fill(0);
+                text(dpm3, start_x + 25, start_y + 13);
+                start_x += 95;
+
+                fill(218, 165, 32);
+                rect(start_x, start_y, 80, 18);
+                let dpm4 = (float(rows4[i][4]) * float(rows4[i][8])).toFixed(1)
+                fill(0);
+                text(dpm4, start_x + 25, start_y + 13);
+                start_x += 130;
+
+                fill(218, 165, 32);
+                rect(start_x, start_y, 80, 18);
+                let ttk = (float(rows4[i][1]) / float(dbs)).toFixed(2)
+                fill(0);
+                text(ttk, start_x + 25, start_y + 13);
+                start_x += 205;
+
+                fill(218, 165, 32);
+                rect(start_x, start_y, 80, 18);
+                let s = float(rows4[i][3]) * float(rows4[i][4]) * 2;
+                let w = (float(rows4[i][1]) - s) / float(rows4[i][4]) + 2;
+                let v = float(rows4[i][1]) / float(rows4[i][4]);
+                rows4_w.push(w);
+                rows4_v.push(v);
+                //print(v,w);
+                let x = round(((w / float(rows4[i][5])).toFixed(2)) * 100);
+                let y = round(((v / float(rows4[i][5])).toFixed(2)) * 100);
+                fill(0);
+                text(x + "%", start_x + 25, start_y + 13);
+                start_x += 220;
+                //print(start_x);
+                fill(218, 165, 32);
+                rect(start_x, start_y, 80, 18);
+                fill(0);
+                text(y + "%", start_x + 25, start_y + 13);
+
+                start_x = 5;
+                start_y += 20;
+
+
+            }
+            fill(218, 165, 32);
+            start_y += 30;
+            text("Accuracy R. (inc. 2 headshots) Grey Mag", 1465, start_y - 8);
+
+            text("Accuracy R. (No headshots) Grey Mag", 1710, start_y - 8);
+            for (let i = 0; i < rows4.length; i++) {
+                fill(218, 165, 32);
+                rect(1555, start_y, 80, 18);
+                let x = round(((rows4_w[i] / float(rows4[i][6])).toFixed(2)) * 100);
+                fill(0);
+                text(x + "%", 1555 + 25, start_y + 13);
+                fill(218, 165, 32);
+                rect(1775, start_y, 80, 18);
+                let y = round(((rows4_v[i] / float(rows4[i][6])).toFixed(2)) * 100);
+                fill(0);
+                text(y + "%", 1775 + 25, start_y + 13);
+
+                start_y += 20;
+            }
+
+            fill(218, 165, 32);
+            start_y += 30;
+            text("Accuracy R. (inc. 2 headshots) Blue Mag", 1465, start_y - 8);
+
+            text("Accuracy R. (No headshots) Blue Mag", 1710, start_y - 8);
+            for (let i = 0; i < rows4.length; i++) {
+                fill(218, 165, 32);
+                rect(1555, start_y, 80, 18);
+                let x = round(((rows4_w[i] / float(rows4[i][7])).toFixed(2)) * 100);
+                fill(0);
+                text(x + "%", 1555 + 25, start_y + 13);
+
+                fill(218, 165, 32);
+                rect(1775, start_y, 80, 18);
+                let y = round(((rows4_v[i] / float(rows4[i][7])).toFixed(2)) * 100);
+                fill(0);
+                text(y + "%", 1775 + 25, start_y + 13);
+
+                start_y += 20;
+            }
+
+            fill(218, 165, 32);
+
+            start_y += 30;
+            text("Accuracy R. (inc. 2 headshots) Purp Mag", 1465, start_y - 8);
+
+            text("Accuracy R. (No headshots) Purp Mag", 1710, start_y - 8);
+            for (let i = 0; i < rows4.length; i++) {
+                fill(218, 165, 32);
+                rect(1555, start_y, 80, 18);
+                let x = round(((rows4_w[i] / float(rows4[i][8])).toFixed(2)) * 100);
+                fill(0);
+                text(x + "%", 1555 + 25, start_y + 13);
+
+                fill(218, 165, 32);
+                rect(1775, start_y, 80, 18);
+                let y = round(((rows4_v[i] / float(rows4[i][8])).toFixed(2)) * 100);
+                fill(0);
+                text(y + "%", 1775 + 25, start_y + 13);
+
+                start_y += 20;
+            }
+            print(start_y);
+            start_y += 70;
+            start_x = 5;
+        }
+
+
+    }
+
+
+</script>

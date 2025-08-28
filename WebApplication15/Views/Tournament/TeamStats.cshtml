@@ -1,0 +1,563 @@
+﻿@model TeamStatViewModel
+
+@{
+    ViewBag.Title = @Model.team_name + "- " + @ViewBag.tourname + " Stats";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="st-dark-bg">
+<div class="st-height-b100 st-height-lg-b80"></div>
+<div class="container">
+    <div class="st-section-heading st-style1">
+            <h4 class="st-section-heading-title">@ViewBag.tourname @ViewBag.touryear - @Model.team_name Stats</h4>
+            <h2 class="st-section-heading-subtitle"style="font-size:50px;">@ViewBag.tourname @ViewBag.touryear - @Model.team_name Stats</h2>
+    </div>
+    <div class="st-height-b25 st-height-lg-b25"></div>
+</div>
+
+<!-- Contact Container -->
+
+<div class="container">
+
+        <div class="st-height-b100 st-height-lg-b80">
+            <a class="btn btn-outline-light" type="button" style="width:100%;margin-bottom:20px;" href="@Url.Action("stats", "Tournament", new { Id =  ViewBag.tourid})">
+                Back to Tournament Stats
+            </a>
+        </div>
+    </div>
+</section>
+
+
+<section class="image__with--text__section" style="margin-bottom: 30px;">
+    <div class="container">
+        <div class="row row-cols-md-2 row-cols-1  align-items-center">
+            <div class="col" style="background-image:url(/img/Logo_Back.png);border-radius:100px">
+                <div class="image__with--text__thumbnail" style="padding:20px">
+                    <img class="display-block" src="/img/Teams/@Model.team_img" alt="drone-image">
+                </div>
+            </div>
+            <div class="col">
+                <div class="image__with--text__content">
+                    <h2 class="image__with--text__title mb-18 info_title">
+                        @Model.team_name
+                    </h2>
+
+                    <div class="image__with--text__percent color-primary-2 mb-40">
+
+                        <div class="image__with--text__percent--list mb-25">
+                            <span class="image__with--text__percent--top d-flex justify-content-between align-content-center">
+                                <span class="image__with--text__percent--content">@Model.team_name_shortcut</span>
+                                <span class="image__with--text__percent--content">@Model.region_Name</span>
+                            </span>
+                        </div>
+
+
+                    </div>
+
+
+                    @{
+                        var players = Model.players.Count();
+                        if (players == 0)
+                        {
+
+                        }
+                        else
+                        {
+                            <div><h3 class="team-info-label">Players</h3></div>
+                            <div class="image__with--text__content--footer d-flex">
+                                <table class="table table-hover table-transparent">
+
+                                    <tbody>
+                                        @foreach (var player in Model.players)
+                                        {
+
+                                            <tr>
+
+                                                <td class="te-in-pl-na">@player.player_Name</td>
+
+                                            </tr>
+
+
+
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                    }
+                    @{
+                        var coaches = Model.coaches.Count();
+                        if (coaches == 0)
+                        {
+
+                        }
+                        else
+                        {
+                            <div><h3 class="team-info-label">Coaches</h3></div>
+                            <div class="image__with--text__content--footer d-flex">
+                                <table class="table table-hover table-transparent">
+
+                                    <tbody>
+                                        @foreach (var coach in Model.coaches)
+                                        {
+
+                                            <tr>
+
+                                                <td class="te-in-pl-na">@coach.coach_Name</td>
+
+                                            </tr>
+
+
+
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                    }
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <img class="image__with--text__position--shape display-block" src="~/img/image-with-text-section-shape.webp" alt="shape img">
+</section>
+<div class="container">
+    <div class="row">
+
+        <h2 class="image__with--text__title mb-18 info_title">
+            Tournamnet Team Standing
+        </h2>
+    </div>
+    
+    <div class="row">
+        <table class="table table-hover table-transparent in-te-ta">
+            <thead style="text-align:center; font-size:15px">
+                <tr>
+                    <th scope="col" style="width: 5%">#</th>
+                    <th scope="col" style="width: 20%">Team Name</th>
+                    <th scope="col" style="width: 5%">Avg. PPG</th>
+                    <th scope="col" style="width: 5%">Avg. KPG</th>
+                    <th scope="col" style="width: 5%">Avg. PLPG</th>
+                    <th scope="col" style="width: 5%">Win %</th>
+                    <th scope="col" style="width: 5%">Top5 %</th>
+                    <th scope="col" style="width: 5%">Top10 %</th>
+                    <th scope="col" style="width: 6%">Matches</th>
+                    <th scope="col" colspan="3" style="width: 39%">Legends</th>
+
+
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var tour in Model.tourstats)
+                {
+                    <tr>
+                        <td>@tour.tour_stand</td>
+                        <td>@Html.ActionLink(@tour.Team_Name, "TeamStats", "tournament", new { Id = tour.Team_Id, tourid = tour.Tour_id })</td>
+                        <td>@tour.av_po_per_game</td>
+                        <td>@tour.av_kills_per_game</td>
+                        <td>@tour.av_place_per_game</td>
+                        <td>@($"{@tour.win_rate}{"%"}")</td>
+                        <td>@($"{@tour.top_5_rate}{"%"}")</td>
+                        <td>@($"{@tour.top_10_rate}{"%"}")</td>
+                        <td>@tour.no_of_games</td>
+                        <td style="text-align:left"><img src="/img/@tour.Legend_1_img" /> @tour.Legend_1_name</td>
+                        <td style="text-align:left"><img src="/img/@tour.Legend_2_img" /> @tour.Legend_2_name</td>
+                        <td style="text-align:left"><img src="/img/@tour.Legend_3_img" /> @tour.Legend_3_name</td>
+
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="container">
+    <div class="st-height-b100 st-height-lg-b80"></div>
+    <div class="row">
+        <div class="col-xs-12 "style="width:100%">
+            <nav>
+                <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-oa-stats" data-toggle="tab" href="#nav-overall" role="tab" aria-controls="nav-overall" aria-selected="true">Overall Stats</a>
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">@ViewBag.map1_name Stats</a>
+                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">@ViewBag.map2_name Stats</a>
+                    @* <a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">About</a> *@
+                </div>
+            </nav>
+            <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-overall" role="tabpanel" aria-labelledby="nav-oa-stats">
+                    <div class="container">
+
+
+                        <div class="row">
+                            <table class="table table-hover table-transparent in-te-ta">
+                                <thead style="text-align:center; font-size:15px">
+                                    <tr>
+                                        
+                                        <th scope="col" style="width: 30%">POI EndZone</th>
+                                        <th scope="col" style="width: 10%">Avg. PPG</th>
+                                        <th scope="col" style="width: 10%">Avg. KPG</th>
+                                        <th scope="col" style="width: 10%">Avg. PLPG</th>
+                                        <th scope="col" style="width: 10%">Win %</th>
+                                        <th scope="col" style="width: 10%">Top5 %</th>
+                                        <th scope="col" style="width: 10%">Top10 %</th>
+                                        <th scope="col" style="width: 10%">Matches</th>
+                                        
+
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var tourteam in Model.tourTeamStats)
+                                    {
+                                        <tr>
+                                            <td>@tourteam.pois_name</td>
+                                            <td>@tourteam.av_po_per_game</td>
+                                            <td>@tourteam.av_kills_per_game</td>
+                                            <td>@tourteam.av_place_per_game</td>
+                                            <td>@($"{@tourteam.win_rate}{"%"}")</td>
+                                            <td>@($"{@tourteam.top_5_rate}{"%"}")</td>
+                                            <td>@($"{@tourteam.top_10_rate}{"%"}")</td>
+                                            <td>@tourteam.no_of_games</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <hr /> @if (Model.overMeta.Count() > 0)
+                        {
+                    <div class="row">
+                        <h2 class="image__with--text__title mb-18 info_title">
+                            Team Overall Meta Stats
+                        </h2>
+
+
+                        <table class="table table-hover table-transparent in-te-ta">
+                            <thead style="text-align:center; font-size:15px">
+                                <tr>
+                                    <th scope="col" colspan="3" style="width: 75%">Legends</th>
+
+
+                                    <th scope="col" style="width: 10%">Pick Rate</th>
+                                    <th scope="col" style="width: 15%">Total</th>
+
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var leg in Model.overMeta)
+                                {
+                                    <tr>
+
+                                        <td style="text-align:left"><img src="/img/@leg.Legend_1_img" /> @leg.Legend_1_name</td>
+                                        <td style="text-align:left"><img src="/img/@leg.Legend_2_img" /> @leg.Legend_2_name</td>
+                                        <td style="text-align:left"><img src="/img/@leg.Legend_3_img" /> @leg.Legend_3_name</td>
+                                        <td>@($"{@leg.pick_rate}{"%"}")</td>
+                                        <td>@leg.total</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        </div>
+                    }
+                    else { }@if (Model.overInvMeta.Count() > 0)
+                    {
+                    <div class="row">
+                        <h2 class="image__with--text__title mb-18 info_title">
+                            Team Overall Meta Invidual Stats
+                        </h2>
+
+
+                        <table class="table table-hover table-transparent in-te-ta">
+                            <thead style="text-align:center; font-size:15px">
+                                <tr>
+                                    <th scope="col" style="width: 75%">Legend</th>
+
+
+                                    <th scope="col" style="width: 10%">Pick Rate</th>
+                                    <th scope="col" style="width: 15%">Total</th>
+
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var leg in Model.overInvMeta)
+                                {
+                                    <tr>
+
+                                        <td style="text-align:left"><img src="/img/@leg.Legend_img" /> @leg.Legend_name</td>
+                                        <td>@($"{@leg.pick_rate}{"%"}")</td>
+                                        <td>@leg.total</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>}else{}
+
+                  
+                </div>
+                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    <div class="container">
+                        <div class="row">
+                           <table class="table table-hover table-transparent in-te-ta">
+                                <thead style="text-align:center; font-size:15px">
+                                    <tr>
+                            <th scope="col" style="width: 30%">POI EndZone</th>
+                            <th scope="col" style="width: 10%">Avg. PPG</th>
+                            <th scope="col" style="width: 10%">Avg. KPG</th>
+                            <th scope="col" style="width: 10%">Avg. PLPG</th>
+                            <th scope="col" style="width: 10%">Win %</th>
+                            <th scope="col" style="width: 10%">Top5 %</th>
+                            <th scope="col" style="width: 10%">Top10 %</th>
+                            <th scope="col" style="width: 10%">Matches</th>
+
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                     @foreach (var mapstat in Model.mapStats1)
+                                    {
+                                        <tr>
+                                            <td>@mapstat.pois_name</td>
+
+
+                                            <td>@mapstat.av_po_per_game</td>
+                                            <td>@mapstat.av_kills_per_game</td>
+                                            <td>@mapstat.av_place_per_game</td>
+                                            <td>@($"{@mapstat.win_rate}{"%"}")</td>
+                                            <td>@($"{@mapstat.top_5_rate}{"%"}")</td>
+                                            <td>@($"{@mapstat.top_10_rate}{"%"}")</td>
+                                            <td>@mapstat.no_of_games</td>
+
+
+                                        </tr>
+                                    } 
+                                </tbody>
+                            </table> 
+                        </div> @if (Model.overMapMeta1.Count() > 0)
+                        {
+                        <div class="row">
+                            <h2 class="image__with--text__title mb-18 info_title">
+                                Team @ViewBag.map1_name Meta Stats
+                            </h2>
+
+
+                            <table class="table table-hover table-transparent in-te-ta">
+                                <thead style="text-align:center; font-size:15px">
+                                    <tr>
+                                        <th scope="col" colspan="3" style="width: 75%">Legends</th>
+
+
+                                        <th scope="col" style="width: 10%">Pick Rate</th>
+                                        <th scope="col" style="width: 15%">Total</th>
+
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var leg in Model.overMapMeta1)
+                                    {
+                                        <tr>
+
+                                            <td style="text-align:left"><img src="/img/@leg.Legend_1_img" /> @leg.Legend_1_name</td>
+                                            <td style="text-align:left"><img src="/img/@leg.Legend_2_img" /> @leg.Legend_2_name</td>
+                                            <td style="text-align:left"><img src="/img/@leg.Legend_3_img" /> @leg.Legend_3_name</td>
+                                            <td>@($"{@leg.pick_rate}{"%"}")</td>
+                                            <td>@leg.total</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        }
+                        else
+                        {
+                        }
+                        
+                        @if (Model.overMapInvMeta1.Count() > 0)
+                        {
+                        <div class="row">
+                            <h2 class="image__with--text__title mb-18 info_title">
+                                Team @ViewBag.map1_name Invidual Meta Stats
+                            </h2>
+
+
+                            <table class="table table-hover table-transparent in-te-ta">
+                                <thead style="text-align:center; font-size:15px">
+                                    <tr>
+                                        <th scope="col" style="width: 75%">Legend</th>
+
+
+                                        <th scope="col" style="width: 10%">Pick Rate</th>
+                                        <th scope="col" style="width: 15%">Total</th>
+
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var leg in Model.overMapInvMeta1)
+                                    {
+                                        <tr>
+
+                                            <td style="text-align:left"><img src="/img/@leg.Legend_img" /> @leg.Legend_name</td>
+                                            
+                                            <td>@($"{@leg.pick_rate}{"%"}")</td>
+                                            <td>@leg.total</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            </div>
+                        }
+                        else
+                        {
+                            
+                        }
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                    <div class="container">
+                        <div class="row">
+                           <table class="table table-hover table-transparent in-te-ta">
+                                <thead style="text-align:center; font-size:15px">
+                                    <tr>
+
+                                        <th scope="col" style="width: 30%">POI EndZone</th>
+                                        <th scope="col" style="width: 10%">Avg. PPG</th>
+                                        <th scope="col" style="width: 10%">Avg. KPG</th>
+                                        <th scope="col" style="width: 10%">Avg. PLPG</th>
+                                        <th scope="col" style="width: 10%">Win %</th>
+                                        <th scope="col" style="width: 10%">Top5 %</th>
+                                        <th scope="col" style="width: 10%">Top10 %</th>
+                                        <th scope="col" style="width: 10%">Matches</th>
+
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                     @foreach (var mapstat in Model.mapStats2)
+                                    {
+                                        <tr>
+                                            <td>@mapstat.pois_name</td>
+                                           
+
+                                            <td>@mapstat.av_po_per_game</td>
+                                            <td>@mapstat.av_kills_per_game</td>
+                                            <td>@mapstat.av_place_per_game</td>
+                                            <td>@($"{@mapstat.win_rate}{"%"}")</td>
+                                            <td>@($"{@mapstat.top_5_rate}{"%"}")</td>
+                                            <td>@($"{@mapstat.top_10_rate}{"%"}")</td>
+                                            <td>@mapstat.no_of_games</td>
+                                           
+
+
+                                        </tr>
+                                    } 
+                                </tbody>
+                            </table> 
+                        </div>
+
+                        @if (Model.overMapMeta2.Count() > 0)
+                        {
+                            <div class="row">
+                                <h2 class="image__with--text__title mb-18 info_title">
+                                    Team @ViewBag.map2_name Meta Stats
+                                </h2>
+
+
+                                <table class="table table-hover table-transparent in-te-ta">
+                                    <thead style="text-align:center; font-size:15px">
+                                        <tr>
+                                            <th scope="col" colspan="3" style="width: 75%">Legends</th>
+
+
+                                            <th scope="col" style="width: 10%">Pick Rate</th>
+                                            <th scope="col" style="width: 15%">Total</th>
+
+
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var leg in Model.overMapMeta2)
+                                        {
+                                            <tr>
+
+                                                <td style="text-align:left"><img src="/img/@leg.Legend_1_img" /> @leg.Legend_1_name</td>
+                                                <td style="text-align:left"><img src="/img/@leg.Legend_2_img" /> @leg.Legend_2_name</td>
+                                                <td style="text-align:left"><img src="/img/@leg.Legend_3_img" /> @leg.Legend_3_name</td>
+                                                <td>@($"{@leg.pick_rate}{"%"}")</td>
+                                                <td>@leg.total</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                        else
+                        {
+                            
+                        
+                     
+                        }
+
+                        @if (Model.overMapInvMeta2.Count() > 0)
+                        {
+                            <div class="row">
+                                <h2 class="image__with--text__title mb-18 info_title">
+                                    Team @ViewBag.map2_name Invidual Meta Stats
+                                </h2>
+
+
+                                <table class="table table-hover table-transparent in-te-ta">
+                                    <thead style="text-align:center; font-size:15px">
+                                        <tr>
+                                            <th scope="col" style="width: 75%">Legend</th>
+
+
+                                            <th scope="col" style="width: 10%">Pick Rate</th>
+                                            <th scope="col" style="width: 15%">Total</th>
+
+
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var leg in Model.overMapInvMeta2)
+                                        {
+                                            <tr>
+
+                                                <td style="text-align:left"><img src="/img/@leg.Legend_img" /> @leg.Legend_name</td>
+
+                                                <td>@($"{@leg.pick_rate}{"%"}")</td>
+                                                <td>@leg.total</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                        else
+                        {
+                       
+                        }
+                    </div>
+                </div>
+                @* <div class="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
+                    Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
+                </div> *@
+            </div>
+
+        </div>
+    </div>
+</div>

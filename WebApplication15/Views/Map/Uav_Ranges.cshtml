@@ -1,0 +1,235 @@
+﻿@model Privacy_Web_App.Models.Uav_Range_ViewModel
+
+
+    <style>
+
+    .show{
+        opacity:1 !important;
+    }
+    </style>
+<div class="st-dark-bg">
+    <div class="st-height-b100 st-height-lg-b80"></div>
+    <div class="container">
+        <div class="st-section-heading st-style1">
+            <h4 class="st-section-heading-title">@Model.map.Name - UAV Ranges</h4>
+            <h2 class="st-section-heading-subtitle" style="font-size:50px;">@Model.map.Name - UAV Ranges</h2>
+        </div>
+        <div class="st-height-b25 st-height-lg-b25"></div>
+    </div>
+    <div class="container">
+
+       
+         @Html.Partial("/Views/Shared/_MapsLinksPartial.cshtml")
+        @Html.Partial("/Views/Shared/_mapTabsPartial.cshtml")
+        
+        <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent"style="position: relative;">
+            <div class="tab-pane fade show active" id="nav-poi" role="tabpanel" aria-labelledby="nav-poi-stats">
+                <div class="container">
+
+                    @*  <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" style="width:40px;height:20px;margin-right:10px">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Show All</label>
+        </div> *@
+
+
+                    <div style="width:1080px;height:1080px;position:relative;top:0px;left:0px;overflow:hidden">
+
+                        @if (ViewBag.mapid == 1)
+                        {
+                            <img src="/img/maps/we_map_black_&_white.png" style="position:relative;top:0px;left:0px" />
+                            @foreach (var poi in Model.uavs)
+                        {
+                            <div id="uav-container-@poi.Id">
+                                @{
+                                    var pos_x = poi.pos_x - 12 + "px";
+                                    var pos_y = poi.pos_y  - 12 +  "px";
+                                    var hover_x = poi.pos_x - 240.50 + "px";
+                                    var hover_y = poi.pos_y  - 240.50 + "px";
+                                      var crypto_x = poi.pos_x - 84 + "px";
+                                    var crypto_y = poi.pos_y  - 84 + "px";
+
+
+
+                                    
+                                       
+                                            <img id="uav-icon-@poi.Id" src="~/img/map_surveyBeacon.webp" style="position:absolute;left:@pos_x;top:@pos_y;z-index:1000;height:24px" />
+                                        
+
+
+
+                                              <img id="uav-img-@poi.Id" class="circle" src="~/img/maps/we_uav_range.png" style="position:absolute;left:@hover_x;top:@hover_y" />
+                                         // <img  src="~/img/maps/crypto_uav_range.png" style="position:absolute;left:@crypto_x;top:@crypto_y" />
+                                      
+                                            
+
+                                    
+                                    
+                                        <style>
+                                        #uav-icon-@poi.Id {
+                                            cursor: pointer
+                                        }
+
+                                        #uav-img-@poi.Id {
+                                            transition: .5s ease;
+                                            opacity: 0;
+                                        }
+
+                                       #uav-icon-@poi.Id:hover + #uav-img-@poi.Id {
+                                            opacity: 1;
+                                        }
+
+                                        
+                                        
+                                        </style>
+
+
+
+                                }
+                            </div>
+                        }
+                        }
+                       @if (ViewBag.mapid == 2)
+                        {
+                            <img src="/img/maps/sp_map_black.png" style="position:relative;top:0px;left:0px" />
+                            @foreach (var poi in Model.uavs)
+                        {
+                            <div id="uav-container-@poi.Id">
+                                @{
+                                    var pos_x = poi.pos_x - 12 + "px";
+                                    var pos_y = poi.pos_y  - 12 +  "px";
+                                    var hover_x = poi.pos_x - 213 + "px";
+                                    var hover_y = poi.pos_y  - 213 + "px";
+                                      var crypto_x = poi.pos_x - 84 + "px";
+                                    var crypto_y = poi.pos_y  - 84 + "px";
+
+
+
+                                    
+                                       
+                                            <img id="uav-icon-@poi.Id" src="~/img/map_surveyBeacon.webp" style="position:absolute;left:@pos_x;top:@pos_y;z-index:1000;height:24px" />
+                                        
+
+
+
+                                              <img id="uav-img-@poi.Id" class="circle" src="~/img/maps/sp_uav_range.png" style="position:absolute;left:@hover_x;top:@hover_y" />
+                                         // <img  src="~/img/maps/crypto_uav_range.png" style="position:absolute;left:@crypto_x;top:@crypto_y" />
+                                      
+                                            
+
+                                    
+                                    
+                                        <style>
+                                        #uav-icon-@poi.Id {
+                                            cursor: pointer
+                                        }
+
+                                        #uav-img-@poi.Id {
+                                            transition: .5s ease;
+                                            opacity: 0;
+                                        }
+
+                                       #uav-icon-@poi.Id:hover + #uav-img-@poi.Id {
+                                            opacity: 1;
+                                        }
+
+                                        
+                                        
+                                        </style>
+
+
+
+                                }
+                            </div>
+                        }
+                        }
+                        @if (ViewBag.mapid == 6)
+                        {
+                            <img src="/img/maps/E-District-black.png" style="position:relative;top:0px;left:0px" />
+                            @foreach (var poi in Model.uavs)
+                        {
+                            <div id="uav-container-@poi.Id">
+                                @{
+                                    var pos_x = poi.pos_x - 12 + "px";
+                                    var pos_y = poi.pos_y  - 12 +  "px";
+                                    var hover_x = poi.pos_x - 250.50 + "px";
+                                    var hover_y = poi.pos_y  - 250.50 + "px";
+                                      var crypto_x = poi.pos_x - 84 + "px";
+                                    var crypto_y = poi.pos_y  - 84 + "px";
+
+
+
+                                    
+                                       
+                                            <img id="uav-icon-@poi.Id" src="~/img/map_surveyBeacon.webp" style="position:absolute;left:@pos_x;top:@pos_y;z-index:1000;height:24px" />
+                                        
+
+
+
+                                              <img id="uav-img-@poi.Id" class="circle" src="~/img/maps/ed_uav_range.png" style="position:absolute;left:@hover_x;top:@hover_y" />
+                                         // <img  src="~/img/maps/crypto_uav_range.png" style="position:absolute;left:@crypto_x;top:@crypto_y" />
+                                      
+                                            
+
+                                    
+                                    
+                                        <style>
+                                        #uav-icon-@poi.Id {
+                                            cursor: pointer
+                                        }
+
+                                        #uav-img-@poi.Id {
+                                            transition: .5s ease;
+                                            opacity: 0;
+                                        }
+
+                                       #uav-icon-@poi.Id:hover + #uav-img-@poi.Id {
+                                            opacity: 1;
+                                        }
+
+                                        
+                                        
+                                        </style>
+
+
+
+                                }
+                            </div>
+                        }
+                        }
+
+
+
+                        
+                       
+                    </div>
+
+
+
+
+
+
+                </div>
+
+            </div>
+
+            <div class="st-height-b100 st-height-lg-b80"></div>
+
+        </div>
+
+        
+
+    </div>
+</div>
+
+@* <script>
+const switchButton = document.getElementById('flexSwitchCheckDefault');
+const signs = document.getElementsByClassName('circle');
+
+switchButton.addEventListener('change', () => {
+    if (switchButton.checked) {
+        Array.from(signs).forEach(sign => sign.classList.add('show'));
+    } else {
+        Array.from(signs).forEach(sign => sign.classList.remove('show'));
+    }
+});
+        </script> *@

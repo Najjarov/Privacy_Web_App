@@ -1,0 +1,214 @@
+﻿{
+   "CodeGenerationMode": 4,
+   "ContextClassName": "dbContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": true,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "DataContext",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "Privacy_Web_App",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "T4TemplatePath": null,
+   "Tables": [
+      {
+         "Name": "alter_voids",
+         "ObjectType": 0
+      },
+      {
+         "Name": "climbs",
+         "ObjectType": 0
+      },
+      {
+         "Name": "coaches",
+         "ObjectType": 0
+      },
+      {
+         "Name": "did_you_know_vids",
+         "ObjectType": 0
+      },
+      {
+         "Name": "evacs",
+         "ObjectType": 0
+      },
+      {
+         "Name": "jump_towers",
+         "ObjectType": 0
+      },
+      {
+         "Name": "Landing_pois",
+         "ObjectType": 0
+      },
+      {
+         "Name": "legends",
+         "ObjectType": 0
+      },
+      {
+         "Name": "loot_detail_info",
+         "ObjectType": 0
+      },
+      {
+         "Name": "loot_info",
+         "ObjectType": 0
+      },
+      {
+         "Name": "map_loot",
+         "ObjectType": 0
+      },
+      {
+         "Name": "map_spawn_rate",
+         "ObjectType": 0
+      },
+      {
+         "Name": "maps",
+         "ObjectType": 0
+      },
+      {
+         "Name": "menu_main",
+         "ObjectType": 0
+      },
+      {
+         "Name": "menu_sub",
+         "ObjectType": 0
+      },
+      {
+         "Name": "playable_spots",
+         "ObjectType": 0
+      },
+      {
+         "Name": "Players",
+         "ObjectType": 0
+      },
+      {
+         "Name": "pois",
+         "ObjectType": 0
+      },
+      {
+         "Name": "rat_spots",
+         "ObjectType": 0
+      },
+      {
+         "Name": "regions",
+         "ObjectType": 0
+      },
+      {
+         "Name": "seasons",
+         "ObjectType": 0
+      },
+      {
+         "Name": "team_rotation",
+         "ObjectType": 0
+      },
+      {
+         "Name": "Teams",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tour_coaches",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tour_detail_stat",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tour_inv_leg",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tour_map_stat",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tour_players",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tour_stats",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tour_team_map_stats",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tour_team_meta",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tour_team_stats",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tour_team_stats_map_inv_meta",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tour_team_stats_map_meta",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tour_team_stats_overall_inv_meta",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tour_team_stats_overall_meta",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tournaments",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tutorial_vids",
+         "ObjectType": 0
+      },
+      {
+         "Name": "uav_ranges",
+         "ObjectType": 0
+      },
+      {
+         "Name": "Valk_ults",
+         "ObjectType": 0
+      },
+      {
+         "Name": "views",
+         "ObjectType": 0
+      },
+      {
+         "Name": "viewsaccess",
+         "ObjectType": 0
+      },
+      {
+         "Name": "visual_tuts",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "PrivDb",
+   "UncountableWords": null,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": true,
+   "UseDateOnlyTimeOnly": true,
+   "UseDbContextSplitting": false,
+   "UseDecimalDataAnnotationForSprocResult": true,
+   "UseFluentApiOnly": false,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": true,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UsePrefixNavigationNaming": false,
+   "UseSchemaFolders": false,
+   "UseSchemaNamespaces": false,
+   "UseSpatial": false,
+   "UseT4": false
+}

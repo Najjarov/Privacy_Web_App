@@ -1,0 +1,147 @@
+﻿@model TeamInfoModel
+
+@{
+    ViewData["Title"] = "Info";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+  
+<section class="image__with--text__section section--padding">
+    <div class="container">
+        <div class="row row-cols-md-2 row-cols-1  align-items-center">
+            <div class="col" style="background-image:url(/img/Logo_Back.png);border-radius:100px">
+                <div class="image__with--text__thumbnail" style="padding:20px">
+                    <img class="display-block" src="/img/@Model.team_img" alt="drone-image">
+                </div>
+            </div>
+            <div class="col">
+                <div class="image__with--text__content">
+                    <h2 class="image__with--text__title mb-18 info_title">
+                        @Model.team_name
+                    </h2>
+                    
+                    <div class="image__with--text__percent color-primary-2 mb-40">
+                        
+                            <div class="image__with--text__percent--list mb-25">
+                                <span class="image__with--text__percent--top d-flex justify-content-between align-content-center">
+                                    <span class="image__with--text__percent--content">@Model.team_name_shortcut</span>
+                                    <span class="image__with--text__percent--content">@Model.region_Name</span>
+                                </span>
+                            </div>
+                            
+                        
+                    </div>
+                   
+
+                                @{
+                                    var players = Model.players.Count();
+                                    if (players == 0)
+                                    {
+
+                                    }
+                                    else
+                                    {
+                            <div><h3 class="team-info-label">Players</h3></div>
+                            <div class="image__with--text__content--footer d-flex">
+                                <table class="table table-hover table-transparent">
+
+                                    <tbody>
+                                        @foreach (var player in Model.players)
+                                        {
+
+                                            <tr>
+
+                                                <td class="te-in-pl-na">@player.Player_Name</td>
+
+                                            </tr>
+
+
+
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                                    }
+                                }
+                    @{
+                        var coaches = Model.coaches.Count();
+                        if (coaches == 0)
+                        {
+
+                        }
+                        else
+                        {
+                            <div><h3 class="team-info-label">Coaches</h3></div>
+                            <div class="image__with--text__content--footer d-flex">
+                                <table class="table table-hover table-transparent">
+
+                                    <tbody>
+                                        @foreach (var coach in Model.coaches)
+                                        {
+
+                                            <tr>
+
+                                                <td class="te-in-pl-na">@coach.coach_Name</td>
+
+                                            </tr>
+
+
+
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                    }
+                                
+                           
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <img class="image__with--text__position--shape display-block" src="assets/img/other/image-with-text-section-shape.webp" alt="shape img">
+</section>
+<div class="container">
+    <div class="row">
+<table class="table table-hover table-transparent in-te-ta">
+    <thead>
+        <tr>
+            <th scope="col">Tournament Name</th>
+            <th scope="col">Standing</th>
+            <th scope="col">Stats</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var tour in Model.tours)
+          {                              
+        <tr>
+            
+            <td>@tour.Tour_name</td>
+
+                        @if(@tour.tour_stand == 1){
+                        <td>1st</td>
+                        }
+                        else{
+                        if(@tour.tour_stand == 2){
+                        <td>2nd</td>
+                        }
+                        else{
+                        if(@tour.tour_stand == 3){
+                        <td>3rd</td>
+                        }
+                        else{
+                                    <td>@($"{@tour.tour_stand}{"th"}")  </td>
+                            }
+                        }
+                        }
+
+
+
+                        <td><a class="stat-link" href="@Url.Action("Stats", "Tournament", new { Id = tour.Tour_id })">Go To Stats Page</a> </td>
+        </tr>
+                }
+    </tbody>
+</table>
+    </div>
+</div>

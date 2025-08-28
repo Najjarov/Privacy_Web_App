@@ -1,0 +1,136 @@
+﻿@model Privacy_Web_App.Models.UpdateUserViewModel
+
+@{
+    ViewData["Title"] = "User Editing";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Update User</h1>
+
+
+<hr />
+<div class="row">
+
+    <div class="card">
+        <div class="card-body">
+        <form asp-action="EditUser">
+
+                @if (ViewData["nameupdateresult"] != null || ViewData["roleupdateresult"] != null || ViewData["passupdateresult"] != null)
+                {
+                    if (ViewData["nameupdateresult"] != null)
+                    {
+                        if (ViewData["nameupdateresulter"] == "error")
+                        {
+
+                            <div class="alert alert-danger" role="alert">
+                                <i class="mdi mdi-block-helper me-2"></i> @ViewData["nameupdateresult"]
+                            </div>
+
+
+                        }
+
+                        <div class="alert alert-success" role="alert">
+                            <i class="mdi mdi-check-all me-2"></i> @ViewData["nameupdateresult"]
+                        </div>
+
+                    }
+
+                    if (ViewData["roleupdateresult"] != null)
+                    {
+                        if (ViewData["roleupdateresulter"] == "error")
+                        {
+
+                            <div class="alert alert-danger" role="alert">
+                                <i class="mdi mdi-block-helper me-2"></i> @ViewData["roleupdateresult"]
+                            </div>
+
+
+                        }
+
+                        <div class="alert alert-success" role="alert">
+                            <i class="mdi mdi-check-all me-2"></i> @ViewData["roleupdateresult"]
+                        </div>
+
+                    }
+                    if (ViewData["passupdateresult"] != null)
+                    {
+                        if (ViewData["passupdateresulter"] == "error")
+                        {
+
+                            <div class="alert alert-danger" role="alert">
+                                <i class="mdi mdi-block-helper me-2"></i> @ViewData["passupdateresult"]
+                            </div>
+
+
+                        }
+
+                        <div class="alert alert-success" role="alert">
+                            <i class="mdi mdi-check-all me-2"></i> @ViewData["passupdateresult"]
+                        </div>
+
+                    }
+
+                }
+
+                <div class="mb-3">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="input-group">
+            
+              
+                <input asp-for="UserId" type="hidden"class="form-control" />
+                
+            </div>
+
+                </div>
+                <div class="mb-3">
+                <div class="input-group">
+                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                    <span class="input-group-text" id="basic-addon1">User Name</span>
+                    <input asp-for="@Model.UserName" class="form-control" autocomplete="username" aria-required="true" placeholder="UserName" />
+                    <span asp-validation-for="@Model.UserName" class="text-danger"></span>
+                </div>
+                </div>
+                <div class="mb-3">
+                <div class="input-group">
+                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                    <span class="input-group-text" id="basic-addon1">Password</span>
+                    <input asp-for="@Model.Password" class="form-control" autocomplete="Password" aria-required="true" placeholder="Password" />
+                    <span asp-validation-for="@Model.Password" class="text-danger"></span>
+                </div>
+                </div>
+                <div class="mb-3">
+                <div class="input-group">
+                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                    <span class="input-group-text" id="basic-addon1">ConfirmPassword</span>
+                    <input asp-for="@Model.ConfirmPassword" class="form-control" autocomplete="ConfirmPassword" aria-required="true" placeholder="ConfirmPassword" />
+                    <span asp-validation-for="@Model.ConfirmPassword" class="text-danger"></span>
+                </div>
+
+                </div>
+                <div class="mb-3">
+
+                    <div class="input-group">
+
+                        <select id="drpEmpList" class="form-select" asp-for="@Model.RoleName" asp-items="@Model.RolesList">
+                            <option value="@Model.RoleName">@Model.RoleName</option>
+                        </select>
+                        <input type="hidden" asp-for="RoleName" />
+                    </div>
+                </div>
+           
+
+            
+          
+                <div class="col-md-offset-2 col-md-10">
+                    <a class="btn btn-outline-secondary Admin-back-Button" href="@Url.Action("UserList")"><i class="fas fa-angle-left"></i> Back To List</a>
+                    <input type="submit" value="Save Changes" class="btn btn-primary" />
+
+
+                </div>
+
+
+
+        </form>
+    </div>
+</div>
+

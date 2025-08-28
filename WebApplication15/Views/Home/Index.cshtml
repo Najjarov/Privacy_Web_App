@@ -1,0 +1,232 @@
+﻿@model Privacy_Web_App.Models.LoginViewModel
+
+@{
+    ViewData["Title"] = "Privacy HomePage";
+    Layout = "~/Views/Shared/_Layout_home.cshtml";
+}
+
+<header class="st-site-header st-style2 st-sticky-header">
+    <div class="st-main-header">
+        <div class="container">
+            <div class="st-main-header-in">
+                <div class="st-main-header-left">
+                    <div class="st-header-author"><img src="/img/section/hero-img.jpg" alt=""></div>
+                </div>
+                <div class="st-main-header-right">
+                    <div class="st-nav">
+
+
+                       @*  @{
+                            var mains = ViewData["main"];
+
+                            @foreach (var main in mains) { }
+                        } *@
+                        <div class="dropdown ">
+                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false" style="width: 100%; background: transparent;">
+                                Tools
+                            </a>
+
+                            <div class="dropdown-menu" style="width: 100%;">
+                                @* <a class="dropdown-item" href="@Url.Action("MiniGame", "Tools")" style="text-align:Center">Mini Game</a> *@
+
+
+
+
+
+
+
+                                @if (ViewData["menu1"] != null)
+                                {
+                                    <a class="dropdown-item" href="@Url.Action("mini_game", "Tools")" style="text-align: Center">Mini Game</a>
+                                }
+                                @if (ViewData["menu2"] != null)
+                                {
+                                    <a class="dropdown-item" href="@Url.Action("Magic_Generator", "Tools")" style="text-align: Center">Magic Generator</a>
+                                }
+                                @if (ViewData["menu3"] != null)
+                                {
+                                    <a class="dropdown-item" href="@Url.Action("Weapon_Simulator", "Tools")" style="text-align: Center">Weapon Simulator</a>
+                                }
+
+                                @if (ViewData["menu1"] == null && ViewData["menu2"] == null && ViewData["menu1"] == null)
+                                {
+                                    <a class="dropdown-item" style="text-align: Center;color:gainsboro">Working on something..</a>
+                                }
+                                
+
+
+                            </div>
+                        </div>
+                       @*  <div class="dropdown ">
+                            <a class="btn btn-secondary dropdown-toggle " href="#" role="button" data-toggle="dropdown" aria-expanded="false" style="width: 100%; background: transparent;">
+                                Information
+                            </a>
+
+                            <div class="dropdown-menu" style="width: 100%;">
+                                <a class="dropdown-item" href="#" style="text-align:Center">SP </a>
+                                <a class="dropdown-item" href="#" style="text-align: Center">WE</a>
+                                <a class="dropdown-item" href="#" style="text-align: Center">Olympus</a>
+                            </div>
+                        </div>
+                        <div class="dropdown ">
+                            <a class="btn btn-secondary dropdown-toggle " href="#" role="button" data-toggle="dropdown" aria-expanded="false" style="width: 100%; background: transparent;">
+                                Data
+                            </a>
+
+                            <div class="dropdown-menu" style="width: 100%;">
+                                <a class="dropdown-item" href="#" style="text-align: Center">SP </a>
+                                <a class="dropdown-item" href="#" style="text-align: Center ">WE</a>
+                                <a class="dropdown-item" href="#" style="text-align: Center">Olympus</a>
+                            </div>
+
+                        </div> *@
+                        <div class="dropdown ">
+                            <a class="btn btn-secondary dropdown-toggle " href="#" role="button" data-toggle="dropdown" aria-expanded="false" style="width: 100%; background: transparent;">
+                                Tournaments
+                            </a>
+
+                            <div class="dropdown-menu" style="width: 100%;">
+                                @if (ViewData["menu4"] != null)
+                                {
+                                    <a class="dropdown-item" href="@Url.Action("List", "Tournament")" style="text-align: Center">Tournament List</a>
+                                }
+                                @if (ViewData["menu4"] == null)
+                                {
+                                    <a class="dropdown-item" style="text-align: Center;color:gainsboro">Working on something..</a>
+                                }
+
+                            </div>
+
+                        </div>
+                        @if (ViewData["menu5"] != null)
+                        {
+
+
+
+
+
+                            <div class="dropdown ">
+                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false" style="width: 100%; background: transparent;">
+                                    Maps Info
+                                </a>
+                                <div class="dropdown-menu" style="width: 100%;">
+
+
+
+
+                                    <a class="dropdown-item " href="@Url.Action("pois", "map",new{id=1})" style="text-align: Center">
+                                        World`s Edge
+                                    </a>
+                                    <a class="dropdown-item " href="@Url.Action("pois", "map",new{id=2})" style="text-align: Center">
+                                        Storm Point
+                                    </a>
+                                    <a class="dropdown-item " href="@Url.Action("pois", "map",new{id=3})" style="text-align: Center">
+                                        Olympus
+                                    </a>
+                                    <a class="dropdown-item " href="@Url.Action("pois", "map",new{id=4})" style="text-align: Center">
+                                        Broken Moon
+                                    </a>
+                                    <a class="dropdown-item " href="@Url.Action("pois", "map",new{id=5})" style="text-align: Center">
+                                        Kings Canyon
+                                    </a>
+                                    <a class="dropdown-item " href="@Url.Action("pois", "map",new{id=6})" style="text-align: Center">
+                                        E-District
+                                    </a>
+                                    @*  <a class="dropdown-item dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true" href="#" style="text-align: Center">
+                                POIs Info & Loot Paths
+                                </a>
+
+
+                                <div class="dropdown-menu">
+
+                                <a class="dropdown-item dropdown-item" href="@Url.Action("poilist", "map",new{id=1})" style="text-align: Center">WE POIs</a>
+
+                                <a class="dropdown-item dropdown-item" href="@Url.Action("poilist", "map",new{id=2})" style="text-align: Center">SP POIs</a>
+
+
+                                </div> *@
+
+
+
+                                </div>
+
+                            </div>
+                            
+                        }
+                        <div class="dropdown ">
+                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false" style="width: 100%; background: transparent;">
+                                Tutorials
+                            </a>
+                            <div class="dropdown-menu" style="width: 100%;">
+
+
+
+
+                                <a class="dropdown-item " href="@Url.Action("did_you_know", "tutorials")" style="text-align: Center">
+                                    Did You Know
+                                </a>
+                                <a class="dropdown-item " href="@Url.Action("tutorial_videos", "tutorials")" style="text-align: Center">
+                                    Tutorials
+                                </a>
+                              
+                                <a class="dropdown-item " href="@Url.Action("Visual_tutorials", "tutorials")" style="text-align: Center">
+                                    Visual Tutorials
+                                </a>
+
+
+
+                            </div>
+
+                        </div>
+
+                       
+
+
+
+                        <div class="st-hero-social-links" style="margin-top:15px">
+                            <a href="https://www.twitch.tv/dz_privacy" target="_blank" class="st-social-btn">
+                                <i class="fab fa-twitch"></i>
+                            </a>
+                            <a href="https://twitter.com/Privacy_Pleas" target="_blank" class="st-social-btn">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+
+                        </div>
+                        @Html.Partial("~/Views/Shared/_LoginPartialforhome.cshtml")
+                        @if (User.IsInRole("Admin") || User.IsInRole("Owner"))
+                        {
+                            <a class="btn btn-secondary" href="@Url.Action("dashboard", "Admin")" style="width: 100%; background: darkgreen;">
+                            Admin Dashboard
+                        </a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- End Header Section -->
+<!-- Start Hero Seciton -->
+<section class="st-hero st-style2" style="background-image: url(/img/hero-bg-1.jpg);>
+    <div class="container">
+        <div class="st-hero-text">
+            <img src="/img/logo-large.png" style="margin: auto;display: block; width: 50%;" />
+            <p>Welcome to Privacy site, the personal online repository of Privacy. <br>This website is a private platform where I compile and share my analytical work and software tools exclusively. </p>
+
+        </div>
+
+    </div>
+    <div id="background-wrap">
+        <div class="bubble x1"></div>
+        <div class="bubble x2"></div>
+        <div class="bubble x3"></div>
+        <div class="bubble x4"></div>
+        <div class="bubble x5"></div>
+        <div class="bubble x6"></div>
+        <div class="bubble x7"></div>
+        <div class="bubble x8"></div>
+        <div class="bubble x9"></div>
+        <div class="bubble x10"></div>
+    </div>
+    <div id="particles-js"></div>
+</section>

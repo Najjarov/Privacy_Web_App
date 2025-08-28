@@ -1,0 +1,164 @@
+﻿@model List<Privacy_Web_App.Models.UserListViewModel>
+
+@{
+    ViewData["Title"] = "User List";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div style=";margin-bottom:60px">
+<h1>User List</h1>
+
+
+    <a class="btn btn-outline-success" style="float:right;" href="@Url.Action("Register", "Admin")"><i class="fas fa-plus"></i> Register new user</a>
+   
+
+    </div>
+
+<div class="row">
+    
+        <div class="card">
+            <div class="card-body">
+               @*  <div class="dropdown float-end">
+                    <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="mdi mdi-dots-vertical"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end" style="">
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item">Action</a>
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item">Another action</a>
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item">Something else</a>
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
+                    </div>
+                </div> *@
+               
+                
+
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                               
+                                <th>User Name</th>
+                                <th>Role</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                             @foreach (var item in Model)
+        {                   
+                            <tr>
+                              
+
+                                <input type="hidden" name="name" id="" value="@item.user_id" />
+                                <td>@item.user_name</td>
+                                <td> @item.Role_Name</td>
+                                <td>
+
+                                    <div class="btn-group" role="group" aria-label="Basic outlined example">
+
+                                        <a class="btn btn-outline-primary" href="@Url.Action("EditUser", new { id = @item.user_id })"><i class="far fa-edit"></i> Edit</a>
+                                        <a data-toggle="modal" data-id="@item.user_id" data-name="@item.user_name" class="delete btn btn-outline-danger" href="#RemoveUser">Remove</a>
+
+
+
+                                    </div>
+
+
+
+
+
+                                   
+
+                                   
+
+
+
+                                </td>
+                            </tr>
+                        }
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+
+   
+   
+</div>
+
+@* <div class="modal hide" id="addBookDialog">
+    <div class="modal-header">
+        <button class="close" data-dismiss="modal">×</button>
+        <h3>Modal header</h3>
+    </div>
+    <div class="modal-body">
+        <p>some content</p>
+        <input type="text" name="bookId" id="bookId" value="" />
+    </div>
+</div> *@
+
+
+
+
+<div class="modal fade" id="RemoveUser" tabindex="-1" role="dialog" aria-labelledby="AddModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="AddModalLabel">Remove User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h4>Are you sure you want to remove this user?</h4>
+                <div class="input-group mb-3">
+                    
+
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">User to remove</span>
+                    </div>
+                    <input hidden type="text" id="userid" />
+                    <input type="text" class="form-control" disabled id="username" placeholder="New role name" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="submit" class="btn btn-outline-danger">Remove User</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).on("click", ".delete", function () {
+        var UserId = $(this).data('id');
+        $(".modal-body #userid").val(UserId);
+        var UserName = $(this).data('name');
+        $(".modal-body #username").val(UserName);
+
+
+        // As pointed out in comments,
+        // it is unnecessary to have to manually call the modal.
+        // $('#addBookDialog').modal('show');
+    });
+
+
+    $("#submit").click(function (e) {
+        e.preventDefault();
+        var id = document.getElementById("userid");
+        var userid = id.value;
+
+
+        window.location.href = "/Admin/DeleteUser?id=" + userid;
+    })
+</script> 
+
+

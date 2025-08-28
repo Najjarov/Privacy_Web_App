@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/bootstrap.min.css" />
+    <link rel="stylesheet" href="/style/fontawesome.css" />
+    <link rel="stylesheet" href="/style/slick.css" />
+    <link rel="stylesheet" href="/style/lightgallery.min.css" />
+    <link rel="stylesheet" href="/style/animate.css" />
+    <link rel="stylesheet" href="/style/style.css" />
+    <link rel="shortcut icon" href="/img/Privacy-logo-white-ver.png" sizes="100%">
+    @if (ViewBag.Title = "MiniGame")
+    {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/addons/p5.sound.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="style_mini_game.css">
+    }
+    
+
+    <title>@ViewBag.Title</title>
+</head>
+<body id="home">
+    <header class="st-site-header st-style1 st-sticky-header">
+        <div class="st-main-header">
+            <div class="container">
+                <div class="st-main-header-in">
+                    <div class="st-main-header-left">
+                        <a class="st-site-branding" href="@Url.Action("Index", "Home")"><img src="/img/logo.png" alt="Privacy"></a>
+                    </div>
+                    <div class="st-main-header-right">
+                        <div class="st-nav">
+                            <div class="sp-phone">
+                                <div class="st-hero-social-links">
+                                    <a href="https://www.twitch.tv/dz_privacy" target="_blank" class="st-social-btn">
+                                        <i class="fab fa-twitch"></i>
+                                    </a>
+                                    <a href="https://twitter.com/Privacy_Pleas" target="_blank" class="st-social-btn">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    @RenderBody()
+    <footer>
+        <div class="container">
+            <div class="st-copyright-wrap text-center">
+                <div class="st-copyright-text"> 2024. All right reserved.</div>
+            </div>
+        </div>
+    </footer>
+    <!-- End Footer Section -->
+    <!-- Scripts -->
+    <script src="/js/jquery-1.12.4.min.js"></script>
+    <script src="/js/jquery.slick.min.js"></script>
+    <script src="/js/lightgallery.min.js"></script>
+    <script src="/js/wow.min.js"></script>
+    <script src="/js/ripples.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/reaction.js"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6JT7FGYCR1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-6JT7FGYCR1');
+    </script>
+</body>
+</html>

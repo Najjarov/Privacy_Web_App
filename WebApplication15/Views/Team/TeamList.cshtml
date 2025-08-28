@@ -1,0 +1,119 @@
+﻿@model TeamsListModel
+
+@{
+    ViewData["Title"] = "TeamList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section  class="st-dark-bg">
+    <div class="st-height-b100 st-height-lg-b80"></div>
+    <div class="container">
+        <div class="st-section-heading st-style1">
+            <h4 class="st-section-heading-title">Team List</h4>
+            <h2 class="st-section-heading-subtitle">Team List</h2>
+        </div>
+        <div class="st-height-b25 st-height-lg-b25"></div>
+    </div>
+
+    <!-- Contact Container -->
+
+    <div class="container">
+        
+    </div>
+    <div class="st-height-b100 st-height-lg-b80"></div>
+</section>
+    
+
+    <div class="container">
+<div class="row">
+
+     @foreach (var region in Model.regions)
+        {
+            
+                
+                    <div class="container" style="margin-top:20px;">
+                        <div class="st-section-heading st-style1">
+                            <h4 class="Priv-Tilte st-section-heading-title">@region.Name</h4>
+                    <h2 class="Priv-sub-Tilte st-section-heading-subtitle">@region.Name</h2>
+                        </div>
+                        <div class="st-height-b25 st-height-lg-b25"></div>
+                    </div>
+            
+               
+   
+    <hr />
+    <div class="row">
+        @foreach (var team in Model.teams.Where(team=>team.region_id == region.Id))
+{
+    
+                    <div class="col-6 col-md-3 Team-Card-Row">
+                             <div class="Team-Card">
+                            @if (team.team_img == "")
+                            {
+                                <div class="imgbox"> <img src="/img/team_logo/No-TeamLogo.png"> </div>
+                            }
+                            else{
+                                <div class="imgbox"> <img src="/img/team_logo/@team.team_img"> </div>
+                            }
+                            <a class="Card-button btn btn-primary" href="@Url.Action("Info", "Team", new {Id = team.Id})">Go To Team Page</a>
+                                <div class="specifies">
+                                    <h2 class="team-name">@team.team_name</h2>
+                                <div class="team-short">@team.team_name_shortcut</div>
+
+
+                                @{var players = Model.players.Where(x => x.Cur_Team_Id == team.Id).Count();
+                                    if (players  == 0)
+                                {
+                                    
+                                }
+                                else
+                                {
+                                    <div class="card-label-div">
+                                        <h5 class="card-label">Players</h5>
+                                    </div>
+                                        @foreach (var player in Model.players.Where(x => x.Cur_Team_Id == team.Id))
+                                    {
+
+                                        <p>@player.Player_Name</p>
+                                        <hr />
+
+
+
+                                    }
+                                }
+                                }
+
+                                    @{var coaches = Model.coaches.Where(x => x.Cur_Team_Id == team.Id).Count();
+                                    if (coaches == 0)
+                                {
+
+                                }
+                                else
+                                {
+                                    <div class="card-label-div">
+                                        <h5 class="card-label">Coaches</h5>
+                                    </div>
+                                    @foreach (var coach in Model.coaches.Where(x => x.Cur_Team_Id == team.Id))
+                                    {
+
+                                        <p>@coach.coach_Name</p>
+                                        <hr />
+
+                                    }
+                                }
+
+
+                                }
+            
+           
+           
+        </div>
+    </div>
+
+                    </div>
+}
+</div>
+            <div class="st-height-b60 st-height-lg-b60"></div>
+ } 
+</div>
+</div>

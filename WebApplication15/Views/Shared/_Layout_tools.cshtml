@@ -1,0 +1,81 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <title>@ViewBag.Title - Privacy Tools</title>
+    <link rel="stylesheet" href="/style/bootstrap.min.css" />
+    <link rel="stylesheet" href="/style/fontawesome.css" />
+    <link rel="stylesheet" href="/style/slick.css" />
+    <link rel="stylesheet" href="/style/lightgallery.min.css" />
+	<link rel="stylesheet" href="/style/animate.css" />
+	
+	
+	
+	<link href="~/css/style.css" rel="stylesheet" />
+
+	<link href="~/css/site.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/style/style.css" />
+    <script src="https://kit.fontawesome.com/79904cb93e.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+    
+    @* <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js" integrity="sha512-WIklPM6qPCIp6d3fSSr90j+1unQHUOoWDS4sdTiR8gxUTnyZ8S2Mr8e10sKKJ/bhJgpAa/qG068RDkg6fIlNFA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/addons/p5.sound.min.js" integrity="sha512-WIklPM6qPCIp6d3fSSr90j+1unQHUOoWDS4sdTiR8gxUTnyZ8S2Mr8e10sKKJ/bhJgpAa/qG068RDkg6fIlNFA==" crossorigin="anonymous" ></script>
+     *@
+	@* <script src="~/js/p5.min.js"></script> *@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+	<script src="~/js/p5.sound.min.js"></script>
+ 
+	<link href="~/css/style_mini_game.css" rel="stylesheet" />
+    <meta charset="utf-8" />
+</head>
+
+<body>
+    <header class="st-site-header st-style1 st-sticky-header">
+        <div class="st-main-header">
+            <div class="container">
+                <div class="st-main-header-in">
+                    <div class="st-main-header-left">
+                        <a class="st-site-branding" href="@Url.Action("Index", "Home")"><img src="/img/logo.png" alt="Privacy"></a>
+                    </div>
+                    <div class="st-main-header-right">
+                        <div class="st-nav">
+                            @Html.Partial("_menuPartial.cshtml")
+                           
+                            <div class="sp-phone">
+                                <div class="st-hero-social-links">
+                                    @Html.Partial("_LoginPartial.cshtml")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div style="height:80px"></div>
+    @RenderBody()
+    <footer>
+        <div class="container">
+            <div class="st-copyright-wrap text-center">
+                <div class="st-copyright-text"> 2024. All right reserved.</div>
+            </div>
+        </div>
+
+    </footer>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6JT7FGYCR1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-6JT7FGYCR1');
+    </script>
+</body>
+
+</html>

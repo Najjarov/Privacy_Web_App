@@ -1,0 +1,105 @@
+﻿@model Privacy_Web_App.Models.ViewsAccessModel
+
+@{
+    ViewData["Title"] = "User Access";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>User Access</h1>
+
+@* <p>
+    <a asp-action="Create">Create New</a>
+</p> *@
+
+
+
+
+
+        @foreach(var item in Model.views){
+    <div class="card">
+        <div class="card-body">
+            <h4 class="mt-0 " style="display: inline-flex;margin-bottom: 25px;">@item.view_name</h4>
+            <a class="btn btn-outline-success" style="/* margin-bottom: 10px; */position: absolute;right: 25px;display: inline-block;" href="@Url.Action("ViewAccess", "Admin", new { id = @item.id })"><i class="far fa-edit"></i> Edit Access</a>
+       
+            @if (Model.access.Where(x => x.view_id == item.id).FirstOrDefault()==null){
+
+                <div class="alert alert-warning" role="alert">
+                    <i class="mdi mdi-alert-outline me-2"></i> There is <strong>No Access</strong> to anyone
+                </div>
+            }
+            else
+            {
+        <div class="table-responsive">
+            <table class="table mb-0">
+                    
+                <tbody>
+                    @foreach(var role in Model.access.Where(x=>x.view_id==item.id)){
+                    <tr>
+                        
+                        <td>@role.role_name</td>
+                               
+                    </tr>
+                        }
+                </tbody>
+            </table>
+                </div>
+
+
+            }
+        </div>
+
+    </div>
+}
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@* <table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.view_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.role_name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.view_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.role_name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table> *@

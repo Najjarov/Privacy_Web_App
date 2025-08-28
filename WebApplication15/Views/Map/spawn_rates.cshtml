@@ -1,0 +1,221 @@
+﻿@model Privacy_Web_App.Models.MapSpawnModel
+
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+<div class="st-dark-bg" >
+    <div class="st-height-b100 st-height-lg-b80"></div>
+    <div class="container">
+        
+        <div class="st-section-heading st-style1">
+            <h4 class="st-section-heading-title">@Model.map_name - Spawn Rates</h4>
+            <h2 class="st-section-heading-subtitle" style="font-size:50px;">@Model.map_name - Spawn Rates</h2>
+        </div>
+        <div class="st-height-b25 st-height-lg-b25"></div>
+    </div>
+    <div class="container">
+        @Html.Partial("/Views/Shared/_MapsLinksPartial.cshtml")
+        @Html.Partial("/Views/Shared/_mapTabsPartial.cshtml")
+
+
+
+
+        <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent" style="position: relative;">
+
+            
+<div class="tab-pane fade show active" id="nav-spawns" role="tabpanel" aria-labelledby="nav-spawns-tab">
+    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                    @if (Model.uav_spawn == "")
+                    {
+                        <a class="nav-item nav-link active" id="nav-console-tab" data-toggle="tab" href="#nav-console" role="tab" aria-controls="nav-console" aria-selected="true">Ring Console</a>
+                    }
+                    else
+                    {
+                        <a class="nav-item nav-link active" id="nav-uav-tab" data-toggle="tab" href="#nav-uav" role="tab" aria-controls="nav-uav" aria-selected="true">UAV</a>
+                        <a class="nav-item nav-link" id="nav-console-tab" data-toggle="tab" href="#nav-console" role="tab" aria-controls="nav-console" aria-selected="true">Ring Console</a>
+                    }
+       
+        <a class="nav-item nav-link" id="nav-hotzone-tab" data-toggle="tab" href="#nav-hotzone" role="tab" aria-controls="nav-hotzone" aria-selected="true">HotZone</a>
+        <a class="nav-item nav-link" id="nav-ship-tab" data-toggle="tab" href="#nav-ship" role="tab" aria-controls="nav-ship" aria-selected="true">Ship Direction</a>
+                    <a class="nav-item nav-link" id="nav-assault-tab" data-toggle="tab" href="#nav-assault" role="tab" aria-controls="nav-assault" aria-selected="true">Assault Bin</a>
+                    <a class="nav-item nav-link" id="nav-evo-tab" data-toggle="tab" href="#nav-evo" role="tab" aria-controls="nav-evo" aria-selected="true">Evo Harvester</a>
+                </div>
+    </div>
+    <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+
+                @if (Model.uav_spawn == "")
+                {
+                    <div class="tab-pane fade show active" id="nav-console" role="tabpanel" aria-labelledby="nav-console-tab">
+                        <div class="container">
+                            @if (Model.console_spawn == "")
+                            {
+                                <img src="/img/maps/tbd_map.png" />
+                            }
+                            else
+                            {
+                                <img src="/img/maps/@Model.console_spawn" />
+                            }
+                            <div class="st-height-b25 st-height-lg-b25"></div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="tab-pane fade show active" id="nav-uav" role="tabpanel" aria-labelledby="nav-uav-tab">
+            <div class="container">
+
+                        @if (Model.uav_spawn == "")
+                        {
+                            <img src="/img/maps/tbd_map.png" />
+                        }
+                        else
+                        {
+                           
+                <img src="/img/maps/@Model.uav_spawn" />
+                        }
+            </div>
+
+        </div>
+        <div class="tab-pane fade" id="nav-console" role="tabpanel" aria-labelledby="nav-console-tab">
+            <div class="container">
+                        @if (Model.console_spawn == "")
+                        {
+                            <img src="/img/maps/tbd_map.png" />
+                        }
+                        else
+                        {
+                <img src="/img/maps/@Model.console_spawn" />
+                        }
+                        <div class="st-height-b25 st-height-lg-b25"></div>
+            </div>
+        </div>
+                }
+       
+        <div class="tab-pane fade" id="nav-hotzone" role="tabpanel" aria-labelledby="nav-hotzone-tab">
+            <div class="container">
+                        @if (Model.hotzone_spawn == "")
+                        {
+                            <img src="/img/maps/tbd_map.png" />
+                        }
+                        else
+                        {
+                            <img src="/img/maps/@Model.hotzone_spawn" />
+                        }
+                        <div class="st-height-b25 st-height-lg-b25"></div>
+            </div>
+
+        </div>
+        <div class="tab-pane fade" id="nav-ship" role="tabpanel" aria-labelledby="nav-ship-tab">
+            <div class="container">
+                        @if (Model.ship_spawn == "")
+                        {
+                            <img src="/img/maps/tbd_map.png" />
+                        }
+                        else
+                        {
+                <img src="/img/maps/@Model.ship_spawn" />
+                        }
+            </div>
+        </div>
+                <div class="tab-pane fade" id="nav-assault" role="tabpanel" aria-labelledby="nav-assault-tab">
+                    <div class="container">
+                        <div class="st-section-heading st-style1">
+                            <h4 class="st-section-heading-title" style="font-size:30px;">@Model.map_name - Assault Bins Spawn Rates</h4>
+                           
+                        </div>
+                        @if (Model.assault_bin_spawn_25px == "")
+                        {
+                            <img src="/img/maps/tbd_map.png" />
+                        }
+                        else
+                        {
+                            <img src="/img/maps/@Model.assault_bin_spawn_25px" />
+                        }
+                        <div class="st-height-b25 st-height-lg-b25"></div>
+                    </div>
+                    <div class="container">
+                        <div class="st-section-heading st-style1">
+                            <h4 class="st-section-heading-title" style="font-size:30px;">@Model.map_name - Assault Bins Spawn Rates Areas</h4>
+                           
+                        </div>
+                        @if (Model.assault_bin_spawn_areas == "")
+                        {
+                            <img src="/img/maps/tbd_map.png" />
+                        }
+                        else
+                        {
+                            <img src="/img/maps/@Model.assault_bin_spawn_areas" />
+                        }
+                        <div class="st-height-b25 st-height-lg-b25"></div>
+                    </div>
+                    <div class="container">
+
+
+                        <div class="st-section-heading st-style1">
+                            <h4 class="st-section-heading-title" style="font-size:30px;">@Model.map_name - Assault Bins Spawn Rates All Locations</h4>
+                            
+                        </div>
+                        @if (Model.assault_bin_spawn_all == "")
+                        {
+                            <img src="/img/maps/tbd_map.png" />
+                        }
+                        else
+                        {
+                            <img src="/img/maps/@Model.assault_bin_spawn_all" />
+                        }
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="nav-evo" role="tabpanel" aria-labelledby="nav-evo-tab">
+                    <div class="container">
+
+                        <div class="st-section-heading st-style1">
+                            <h4 class="st-section-heading-title" style="font-size:30px;">@Model.map_name - Evo Harvester Spawn Rates</h4>
+                          
+                        </div>
+                        @if (Model.evo_harvester_spawn_25px == "")
+                        {
+                            <img src="/img/maps/tbd_map.png" />
+                        }
+                        else
+                        {
+                            <img src="/img/maps/@Model.evo_harvester_spawn_25px" />
+                        }
+                        <div class="st-height-b25 st-height-lg-b25"></div>
+                    </div>
+                    <div class="container">
+                        <div class="st-section-heading st-style1">
+                            <h4 class="st-section-heading-title" style="font-size:30px;">@Model.map_name - Evo Harvester Spawn Rates Areas</h4>
+                           
+                        </div> @if (Model.evo_harvester_spawn_areas == "")
+                        {
+                            <img src="/img/maps/tbd_map.png" />
+                        }
+                        else
+                        {
+                            <img src="/img/maps/@Model.evo_harvester_spawn_areas" />
+                        }
+                        <div class="st-height-b25 st-height-lg-b25"></div>
+                    </div>
+                    <div class="container">
+                        <div class="st-section-heading st-style1">
+                            <h4 class="st-section-heading-title" style="font-size:30px;">@Model.map_name - Evo Harvester Spawn Rates All Locations</h4>
+                           
+                        </div>
+                    </div> @if (Model.evo_harvester_spawn_all == "")
+                    {
+                        <img src="/img/maps/tbd_map.png" />
+                    }
+                    else
+                    {
+                        <img src="/img/maps/@Model.evo_harvester_spawn_all" />
+                    }
+                </div>
+                </div>
+    </div>
+</div>
+        </div>
+    </div>

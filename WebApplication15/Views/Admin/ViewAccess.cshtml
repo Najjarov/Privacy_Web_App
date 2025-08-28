@@ -1,0 +1,120 @@
+﻿@model Privacy_Web_App.Models.ViewsAccessEditModel
+
+@{
+    ViewData["Title"] = "ViewAccess";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>@Model.view.view_name - Access List</h1>
+<input type="hidden" value="@Model.view.id" id="viewid" />
+<div>
+   
+    <hr />
+    <div class="card">
+        <div class="card-body">
+            
+            @if (Model.RolesList.Count() > 0)
+            {
+                <button class="btn btn-outline-success" style="/* margin-bottom: 10px; */position: absolute;right: 25px;display: inline-block;" data-toggle="modal" data-target="#AddModal"> Add role to access</button>
+            }
+            else
+            {
+             
+                <div class="alert alert-success" style="/* margin-bottom: 10px; */position: absolute;right: 25px;display: inline-block;" role="alert">
+                    All roles had access to this view!
+                </div>
+            }
+            
+            
+            <div class="table-responsive">
+                <table class="table mb-0">
+            @if (Model.UserAccess.FirstOrDefault() == null)
+            {
+                        <tr><th>Roles that can access this view</th> </tr>
+                <tr><td><div class="alert alert-warning" role="alert">
+                    <i class="mdi mdi-alert-outline me-2"></i> There is <strong>No Access</strong> to anyone
+                                </div>
+                            </td>
+                        </tr>
+            }
+            else
+            {
+                
+                        <tr><th> Roles that can access this view</th> </tr>
+                        <tbody>
+                            @foreach (var access in Model.UserAccess)
+                            {
+                                <tr>
+
+                                    <td>@access.role_name</td>
+                                    <td>
+
+                                        <a class="btn btn-outline-danger" href="@Url.Action("RemoveViewAccess", "Admin", new { viewid = Model.view.id ,role = access.role_name})"> Remove Access </a>
+                                        
+                                        
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    
+
+
+            }
+
+                </table>
+            </div>
+
+
+        </div>
+</div>
+
+
+   
+
+    <!-- Modal -->
+    <div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="AddModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="AddModalLabel">Add new role to access the view</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+
+                        <div class="input-group">
+
+                            <select id="drpEmpList" class="form-select" asp-items="@Model.RolesList">
+                                
+                            </select>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" id="submit" class="btn btn-outline-success">Add role to access</button>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+   
+    <script>
+        $("#submit").click(function (e) {
+            e.preventDefault();
+            var id = document.getElementById("viewid");
+            var viewidno = id.value;
+            var rol = document.getElementById("drpEmpList");
+            var rolename = rol.value;
+
+
+            window.location.href = "/Admin/AddViewAccess?viewid=" + viewidno + "&role=" + rolename;
+        })
+    </script>
+
+
+
+   
